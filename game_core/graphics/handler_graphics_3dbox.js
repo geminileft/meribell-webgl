@@ -19,30 +19,9 @@ function Handler_Graphics_3dbox(rotate_x, rotate_y,
 }
 
 Handler_Graphics_3dbox.prototype.update = function(gfx) {
-	/*
-    const rotate_messages = this.game_object.messages['rotate'];
-    if (rotate_messages != null) {
-        for (var r_m = 0;r_m < rotate_messages.length;++r_m) {
-            const r_msg = rotate_messages[r_m];
-            const msg_data = r_msg.data;
-            if (msg_data.x == true) {
-                this.rotate_x = msg_data.r;
-            }
-            if (msg_data.y == true) {
-                this.rotate_y = msg_data.r;
-            }
-            if (msg_data.z == true) {
-                this.rotate_z = msg_data.r;
-            }
-        }
-    }
-	*/
-
     const x = this.game_object.x;
     const y = this.game_object.y;
     const z = this.game_object.z;
-    
-    //const r_z = this.rotate_z || 0;
 
 	var identity = mat4.create();
 
@@ -50,11 +29,9 @@ Handler_Graphics_3dbox.prototype.update = function(gfx) {
 
 	var rotateX = mat4.create();
 	var rotateY = mat4.create();
-	//var rotateZ = mat4.create();
 
 	mat4.rotateX(identity, this.rotate_x, rotateX);
 	mat4.rotateY(identity, this.rotate_y, rotateY);
-	//mat4.rotateZ(identity, r_z, rotateZ);
 
 	var working = mat4.create();
 	var working2 = mat4.create();
@@ -66,10 +43,6 @@ Handler_Graphics_3dbox.prototype.update = function(gfx) {
 	mat4.translate(modelTranslateMatrix, [x, y, -z]);
 
 	mat4.multiply(modelTranslateMatrix, rotateX, working);
-	/*
-	mat4.multiply(working, rotateY, working2);
-	mat4.multiply(working2, rotateZ, modelMatrix);
-	*/
 	mat4.multiply(working, rotateY, modelMatrix);
 
     const data = {
@@ -126,8 +99,6 @@ vertices : [
 	, 1.000000, 1.000000, -0.999999
 	, -1.000000, -1.000000, -1.000000
 	, -1.000000, 1.000000, -1.000000
-
-
 ]
 
 , normals : [
@@ -172,11 +143,7 @@ vertices : [
 	, 0.0000, 0.0000, -1.0000
 	, 0.0000, 0.0000, -1.0000
 	, 0.0000, 0.0000, -1.0000
-
-
 ]
-
 , count : 36
-
 };
 }
