@@ -1,5 +1,4 @@
 <html>
-
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
   <title>Meribelle Demo</title>
@@ -64,51 +63,6 @@ function postImagesLoad(loadedImages, env) {
   const scene_objects = Scene_Jolene(gfx);
 
   engine.start(scene_objects);
-}
-
-function get_map_array_string(tilemap, name) {
-  const map_array = tilemap.map;
-  var output_text = "const " + name + "_ARRAY  = [\r\n";
-  var column_separator = '';
-
-  const arr_length = map_array.length;
-  for (var i = 0;i < map_array.length;++i) {
-    const row_array = map_array[i];
-    output_text += column_separator + "[\r\n";
-    var row_separator = "\t";
-    for (var j = 0;j < row_array.length;++j) {
-      const tile_object = row_array[j];
-      var tile_value = 'null';
-      if (tile_object != null) {
-        tile_value = tile_object.name;
-      }
-      output_text += row_separator + tile_value;
-      row_separator = "\r\n\t, ";
-    }
-    output_text += "\r\n]\r\n";
-    column_separator = ', ';
-  }
-  output_text += "];\r\n\r\n";
-
-  output_text += "const " + name + "_DEFINITION = {width:" + tilemap.width + ", height:" + tilemap.height + ", map:" + name + "_ARRAY};";
-
-  return output_text;
-}
-
-function export_map(name) {
-  const output_text = get_map_array_string(tilemap, name);
-  const map_output = document.getElementById('map_output');
-  map_output.value = output_text;
-
-}
-
-function ui_event(event_name) {
-  main_input.receiveUiEvent(event_name);
-}
-
-function mode_changed(ddl) {
-  var mode = ddl.options[ddl.selectedIndex].value;
-  main_input.receiveUiEvent(mode);
 }
 </script>
 </head>
