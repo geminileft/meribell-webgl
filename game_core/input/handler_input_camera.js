@@ -96,16 +96,6 @@ Handler_Input_Camera.prototype.processActions = function(current_actions, action
             case 'ui_event':
                 ui_actions.push(action_item.data);
             break;
-            /*
-            case 'click':
-                const viewport = this.gfx.viewport;
-                const click_action = clickActionFunc(viewport
-                    , action_item.data, this.hr, this.map_height, this.game_object);
-                if (click_action != null) {
-                    ui_actions.push(click_action);
-                }
-            break;
-            */
         }
     }
     return {dir:direction_actions, ui:ui_actions};
