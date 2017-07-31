@@ -1,4 +1,3 @@
-
 function square_vertices(l, b, unit) {
     const r = l + unit;
     const t = b + unit;
@@ -87,25 +86,6 @@ function create_interleaved3(array1, units1, array2, units2, array3, units3, cou
 }
 
 function array_duplicate(array_of_array, item_count, fit_size) {
-/*
-    const color_range = [
-        [1.0, 0.0, 0.0, 1.0]
-    ]
-    const colors = array_duplicate(color_range, 1, 36);
-*/
-
-/*
-    const color_range = [
-        [1.0, 0.0, 0.0, 1.0]
-        , [0.0, 1.0, 0.0, 1.0]
-        , [0.0, 0.0, 1.0, 1.0]
-        , [1.0, 1.0, 0.0, 1.0]
-        , [1.0, 0.0, 1.0, 1.0]
-        , [0.0, 1.0, 1.0, 1.0]
-    ]
-    const colors = array_duplicate(color_range, 6, 36);
-*/
-
     var results = [];
     var counter = 0;
     var item_index = 0;
