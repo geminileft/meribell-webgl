@@ -1,0 +1,124 @@
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <title>Visuals Proof Of Concept</title>
+
+  <script type="text/javascript" src="./other/glMatrix-0.9.5.min.js"></script>
+  <script type="text/javascript" src="./other/graphics_helpers.js"></script>
+
+  <script type="text/javascript" src="./opengl/shader_color_3d_lighting.js"></script>
+  <script type="text/javascript" src="./opengl/shader_color_3d.js"></script>
+  <script type="text/javascript" src="./opengl/shader_lines.js"></script>
+  <script type="text/javascript" src="./opengl/shaders.js"></script>
+  <script type="text/javascript" src="./opengl/js_gl_helpers.js"></script>
+
+  <script type="text/javascript" src="./game_core/objects/game_object.js"></script>
+  <script type="text/javascript" src="./game_core/objects/game_message.js"></script>
+
+  <script type="text/javascript" src="./game_core/graphics/handler_graphics_3dbox.js"></script>
+  <script type="text/javascript" src="./game_core/graphics/handler_graphics_3dlines.js"></script>
+  <script type="text/javascript" src="./game_core/graphics/handler_graphics_honeycombsurface.js"></script>
+  <script type="text/javascript" src="./game_core/graphics/handler_graphics_tileset.js"></script>
+  <script type="text/javascript" src="./game_core/graphics/handler_graphics_colorbox.js"></script>
+  <script type="text/javascript" src="./game_core/graphics/handler_graphics_stencil.js"></script>
+  <script type="text/javascript" src="./game_core/graphics/handler_graphics_matrix.js"></script>
+
+  <script type="text/javascript" src="./game_core/input/handler_input_tileset.js"></script>
+  <script type="text/javascript" src="./game_core/input/handler_input_camera.js"></script>
+
+  <script type="text/javascript" src="./game_core/logic/handler_logic_tileset.js"></script>
+  <script type="text/javascript" src="./game_core/logic/handler_logic_rotate.js"></script>
+  <script type="text/javascript" src="./game_core/logic/handler_logic_camera_location.js"></script>
+
+  <script type="text/javascript" src="./game_core/scenes/scene_tilemap.js"></script>
+  <script type="text/javascript" src="./game_core/scenes/scene_3d.js"></script>
+  <script type="text/javascript" src="./game_core/scenes/scene_jolene.js"></script>
+
+  <script type="text/javascript" src="./sys/sys_env.js"></script>
+  <script type="text/javascript" src="./sys/sys_input_shared.js"></script>
+  <script type="text/javascript" src="./sys/sys_input.js"></script>
+  <script type="text/javascript" src="./sys/sys_logic.js"></script>
+  <script type="text/javascript" src="./sys/sys_graphics.js"></script>
+  <script type="text/javascript" src="./sys/sys_engine.js"></script>
+  
+  <script type="text/javascript" src="./game/tilemap_definition.js"></script>
+  <script type="text/javascript" src="./game/tilemap_array_export.js"></script>
+  <script type="text/javascript" src="./game/tilemap_array.js"></script>
+
+<script type="text/javascript">
+var main_input = null;
+
+function main(canvas_id) {
+  const images = [
+  ];
+  const env = new Sys_Env(canvas_id);
+  env.loadImages(images, postImagesLoad);
+}
+
+function postImagesLoad(loadedImages, env) {
+  const dimensions = env.getDimensions();
+  const glContext = env.createWebGLContext();
+  const gfx = new Sys_Graphics(glContext);
+  gfx.initDisplay(dimensions.width, dimensions.height);
+  gfx.loadTextures(loadedImages);
+  gfx.initShaders();
+  main_input = new Sys_Input(dimensions.width, dimensions.height, false, true);
+  env.setInputHandler(main_input);
+  const logic = new Sys_Logic();
+  const engine = new Sys_Engine(main_input, gfx, logic);
+  const scene_objects = Scene_Jolene(gfx);
+
+  engine.start(scene_objects);
+}
+
+function get_map_array_string(tilemap, name) {
+  const map_array = tilemap.map;
+  var output_text = "const " + name + "_ARRAY  = [\r\n";
+  var column_separator = '';
+
+  const arr_length = map_array.length;
+  for (var i = 0;i < map_array.length;++i) {
+    const row_array = map_array[i];
+    output_text += column_separator + "[\r\n";
+    var row_separator = "\t";
+    for (var j = 0;j < row_array.length;++j) {
+      const tile_object = row_array[j];
+      var tile_value = 'null';
+      if (tile_object != null) {
+        tile_value = tile_object.name;
+      }
+      output_text += row_separator + tile_value;
+      row_separator = "\r\n\t, ";
+    }
+    output_text += "\r\n]\r\n";
+    column_separator = ', ';
+  }
+  output_text += "];\r\n\r\n";
+
+  output_text += "const " + name + "_DEFINITION = {width:" + tilemap.width + ", height:" + tilemap.height + ", map:" + name + "_ARRAY};";
+
+  return output_text;
+}
+
+function export_map(name) {
+  const output_text = get_map_array_string(tilemap, name);
+  const map_output = document.getElementById('map_output');
+  map_output.value = output_text;
+
+}
+
+function ui_event(event_name) {
+  main_input.receiveUiEvent(event_name);
+}
+
+function mode_changed(ddl) {
+  var mode = ddl.options[ddl.selectedIndex].value;
+  main_input.receiveUiEvent(mode);
+}
+</script>
+</head>
+<body onload='main("canvas");'>
+  <canvas tabindex="1" id="canvas" style="border: none;" width="560" height="560"></canvas>
+</body>
+</html>
