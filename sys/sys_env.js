@@ -1,6 +1,3 @@
-//local system
-//javascript/webgl in this case
-
 function Sys_Env(canvas_id) {
 	this.canvas = document.getElementById(canvas_id);
     this.canvas.addEventListener("click", this.getClickPosition.bind(this), false);
@@ -13,9 +10,6 @@ function Sys_Env(canvas_id) {
     this.inputHandler = null;
 }
 
-//returns anon obj
-//	.width
-//	.height
 Sys_Env.prototype.getDimensions = function() {
 	return {width:this.canvas.width, height:this.canvas.height};
 }
@@ -75,15 +69,12 @@ Sys_Env.prototype.getClickPosition = function(e) {
 
 Sys_Env.prototype.getKeyDown = function(e) {
 	this.inputHandler.receiveKeyDown(e.key);
-	//alert('key pressed');
 }
 
 Sys_Env.prototype.getKeyUp = function(e) {
 	this.inputHandler.receiveKeyUp(e.key);
-	//alert('key pressed');
 }
 
-// Helper function to get an element's exact position
 function getPosition(el) {
   var xPos = 0;
   var yPos = 0;
@@ -109,4 +100,3 @@ function getPosition(el) {
     y: yPos
   };
 }
-
