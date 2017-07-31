@@ -146,7 +146,5 @@ const single_color_shader = {
 const shader_programs = [
   texture_shader
   , single_color_shader
-  , shader_color_3d_shader
-  , shader_lines_shader
   , shader_color_3d_lighting_shader
 ]
