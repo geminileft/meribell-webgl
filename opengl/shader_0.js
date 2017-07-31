@@ -143,8 +143,8 @@ const single_color_shader = {
   , draw: single_color_draw
 };
 
-const shader_programs = [
+var shader_programs = [
   texture_shader
   , single_color_shader
-  , shader_color_3d_lighting_shader
-]
+];
+

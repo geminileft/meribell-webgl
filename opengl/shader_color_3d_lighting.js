@@ -98,3 +98,5 @@ const shader_color_3d_lighting_shader = {
   , uniforms: ['uMVPMatrix', 'uNormalMatrix']
   , draw: shader_color_3d_lighting_draw
 };
+
+shader_programs.push(shader_color_3d_lighting_shader);
