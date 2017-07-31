@@ -34,9 +34,7 @@ Handler_Graphics_3dbox.prototype.update = function(gfx) {
 	mat4.rotateY(identity, this.rotate_y, rotateY);
 
 	var working = mat4.create();
-	var working2 = mat4.create();
 	var modelMatrix = mat4.create();
-	var mvMatrix = mat4.create();
 
 	var modelTranslateMatrix = mat4.create();
 	mat4.identity(modelTranslateMatrix);
