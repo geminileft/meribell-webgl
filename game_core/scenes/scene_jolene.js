@@ -27,26 +27,7 @@ function Scene_Jolene(gfx) {
         , z_pos: 20
         , z_rot: 0
     };
-/*
-  const camera_location = {
-        x_pos: 2.75
-        , x_rot: .469
-        , y_pos: 28
-        , y_rot: -.475
-        , z_pos: -10
-        , z_rot: 0
-    };
-*/
-/*
-  const camera_location = {
-        x_pos: -1.5
-        , y_pos: 10.25
-        , z_pos: -16.25
-        , x_rot: .489
-        , y_rot: -.505
-        , z_rot: 0
-    };
-*/
+
   matrix_handler = new Handler_Graphics_Matrix(projectionMatrix
     , gfx, camera_location);
   game_object.addHandler(matrix_handler);
@@ -127,7 +108,6 @@ function Scene_Jolene(gfx) {
   game_objects.push(game_object);
 
 /********end row */
-
 
   game_object = new Game_Object(0, 6, 4);
   handler_graphics = new Handler_Graphics_3dbox(0, 0, color_range
