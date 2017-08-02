@@ -1,8 +1,8 @@
 function Handler_Graphics_3dbox(rotate_x, rotate_y,
-	color_range, projectionMatrix, matrixHandler) {
+	color_range, matrixHandler) {
     this.rotate_x = rotate_x;
     this.rotate_y = rotate_y;
-	this.projectionMatrix = projectionMatrix;
+	this.projectionMatrix = matrixHandler.getProjectionMatrix();
 	this.matrixHandler = matrixHandler;
     this.sys = 'graphics';
 

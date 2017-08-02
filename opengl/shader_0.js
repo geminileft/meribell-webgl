@@ -1,3 +1,4 @@
+//SHADER HAS HARD CODING
 
 const SINGLE_COLOR_VERTEX_SHADER = `
 uniform mat4 uProjectionMatrix;

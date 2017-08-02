@@ -1,3 +1,5 @@
+//TODO: SHADER HAS HARD CODING
+
 const SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER = `
 uniform mat4 uMVPMatrix;
 uniform mat4 uNormalMatrix;
