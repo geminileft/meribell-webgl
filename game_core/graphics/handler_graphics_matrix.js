@@ -1,27 +1,17 @@
 //TODO: LOTS OF HARD CODED STUFF
 
-function Handler_Graphics_Matrix(gfx, camera_location) {
+function Handler_Graphics_Matrix(gfx, camera_location, angle, near_plane, far_plane) {
     const ratio = gfx.gl.canvas.width / gfx.gl.canvas.height;
-    const angle = 40;
-
-    var projectionMatrix = mat4.create();
-
-    mat4.perspective(angle, ratio, .1, 100.0, projectionMatrix);
-
-    this.projectionMatrix = projectionMatrix;
-
+    this.projectionMatrix = mat4_perspective(angle, ratio, near_plane, far_plane);
     this.camera_location = camera_location;
-
     this.sys = 'graphics';
 }
-
 
 Handler_Graphics_Matrix.prototype.getProjectionMatrix = function() {
     return this.projectionMatrix;
 }
 
 Handler_Graphics_Matrix.prototype.getViewMatrix = function() {
-    //  mat4 camera_setup = rotate_camera_x * rotate_camera_y * translate_camera;
 
     var identity = mat4.create();
     mat4.identity(identity);
