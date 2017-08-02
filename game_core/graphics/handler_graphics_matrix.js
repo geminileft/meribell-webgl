@@ -1,4 +1,4 @@
-//TODO: LOTS OF HARD CODED STUFF
+//TODO: MATRIX CALCULATIONS CAN USE FUNCTIONAL APPROACH
 
 function Handler_Graphics_Matrix(gfx, camera_location, angle, near_plane, far_plane) {
     const ratio = gfx.gl.canvas.width / gfx.gl.canvas.height;
@@ -16,11 +16,14 @@ Handler_Graphics_Matrix.prototype.getViewMatrix = function() {
     var identity = mat4.create();
     mat4.identity(identity);
 
-    var rotateX = mat4.create();
+    //var rotateX = mat4.create();
 	var rotateY = mat4.create();
 	var rotateZ = mat4.create();
 
-    mat4.rotateX(identity, this.camera_location.x_rot, rotateX);
+    //mat4.rotateX(identity, this.camera_location.x_rot, rotateX);
+
+    var rotateX = mat4_rotate_x(null, this.camera_location.x_rot);
+
 	mat4.rotateY(identity, this.camera_location.y_rot, rotateY);
 
     var workingRotate1 = mat4.create();
