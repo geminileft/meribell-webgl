@@ -1,7 +1,6 @@
-function Handler_Graphics_Matrix(gfx, camera_location, angle, near_plane, far_plane) {
+function Handler_Graphics_Matrix(gfx, angle, near_plane, far_plane) {
     const ratio = gfx.gl.canvas.width / gfx.gl.canvas.height;
     this.projectionMatrix = mat4_perspective(angle, ratio, near_plane, far_plane);
-    this.camera_location = camera_location;
     this.sys = 'graphics';
 }
 
