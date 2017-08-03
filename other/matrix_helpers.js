@@ -31,7 +31,18 @@ function mat4_translate(translateVector) {
 }
 
 function mat4_multiply(a, b) {
-    var mat = mat4.create();
-    mat4.multiply(a, b, mat);
-    return mat;
+    var mat_input = mat4.create();
+    var mat_output = mat4.create();
+
+    const length = arguments.length;
+
+    mat_input = a;
+
+    for (var i = 1;i < length; ++i) {
+        mat4.multiply(mat_input, arguments[i], mat_output);
+        for (var j = 0;j < mat_output.length; ++j) {
+            mat_input[j] = mat_output[j];
+        }
+    }
+    return mat_output;
 }
