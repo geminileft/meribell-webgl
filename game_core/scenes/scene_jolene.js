@@ -18,7 +18,7 @@ function Scene_Jolene(gfx) {
       , [0.0, 1.0, 1.0, 1.0]
   ];
 
-  game_object = new Game_Object(0, 0, 0);
+  game_object = new Game_Object(10, 12, 20);
 
   const camera_location = {
         x_pos: 10
