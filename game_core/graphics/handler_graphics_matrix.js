@@ -12,19 +12,8 @@ Handler_Graphics_Matrix.prototype.getProjectionMatrix = function() {
 }
 
 Handler_Graphics_Matrix.prototype.getViewMatrix = function() {
-
-    var identity = mat4.create();
-    mat4.identity(identity);
-
-    //var rotateX = mat4.create();
-	var rotateY = mat4.create();
-	var rotateZ = mat4.create();
-
-    //mat4.rotateX(identity, this.camera_location.x_rot, rotateX);
-
-    var rotateX = mat4_rotate_x(null, this.camera_location.x_rot);
-
-	mat4.rotateY(identity, this.camera_location.y_rot, rotateY);
+    const rotateX = mat4_rotate_x(null, this.camera_location.x_rot);
+    const rotateY = mat4_rotate_y(null, this.camera_location.y_rot);
 
     var workingRotate1 = mat4.create();
     mat4.multiply(rotateX, rotateY, workingRotate1);

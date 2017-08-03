@@ -9,7 +9,17 @@ function mat4_rotate_x(in_matrix, radians) {
         in_matrix = mat4.create(); 
         mat4.identity(in_matrix);
     }
-    var rotateX = mat4.create();
-    mat4.rotateX(in_matrix, radians, rotateX);
-    return rotateX;
+    var rotate = mat4.create();
+    mat4.rotateX(in_matrix, radians, rotate);
+    return rotate;
+}
+
+function mat4_rotate_y(in_matrix, radians) {
+    if (in_matrix == null) {
+        in_matrix = mat4.create(); 
+        mat4.identity(in_matrix);
+    }
+    var rotate = mat4.create();
+    mat4.rotateY(in_matrix, radians, rotate);
+    return rotate;
 }
