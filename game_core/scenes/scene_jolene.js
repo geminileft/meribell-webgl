@@ -34,6 +34,8 @@ function Scene_Jolene(gfx) {
   game_object.addHandler(matrix_handler);
   handler_input = new Handler_Input_Camera();
   game_object.addHandler(handler_input);
+  handler_logic = new Handler_Logic_Camera();
+  game_object.addHandler(handler_logic);
   game_objects.push(game_object);
 
 /*******start */
