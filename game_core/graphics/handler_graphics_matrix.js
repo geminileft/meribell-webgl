@@ -26,9 +26,8 @@ Handler_Graphics_Matrix.prototype.getViewMatrix = function() {
 
     const rotateX = mat4_rotate_x(null, this.camera_location.x_rot);
     const rotateY = mat4_rotate_y(null, this.camera_location.y_rot);
-    const workingRotate1 = mat4_multiply(rotateX, rotateY);
-    const translateMatrix = mat4_translate(translateVector);
-    const viewMatrix = mat4_multiply(workingRotate1, translateMatrix);
+    const translateMatrix = mat4_translate(null, translateVector);
+    const viewMatrix = mat4_multiply(rotateX, rotateY, translateMatrix);
     
     //column major
     //https://learnopengl.com/#!Getting-started/Camera

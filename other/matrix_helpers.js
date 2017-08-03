@@ -23,11 +23,15 @@ function mat4_rotate_y(in_matrix, radians) {
     mat4.rotateY(in_matrix, radians, rotate);
     return rotate;
 }
-function mat4_translate(translateVector) {
-    var translateMatrix = mat4.create();
-    mat4.identity(translateMatrix);
-    mat4.translate(translateMatrix, translateVector);
-    return translateMatrix;
+
+
+function mat4_translate(in_matrix, translateVector) {
+    if (in_matrix == null) {
+        in_matrix = mat4.create();
+        mat4.identity(in_matrix);
+    }
+    mat4.translate(in_matrix, translateVector);
+    return in_matrix;
 }
 
 function mat4_multiply(a, b) {
