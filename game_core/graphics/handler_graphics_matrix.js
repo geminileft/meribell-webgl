@@ -1,5 +1,11 @@
 //TODO: MATRIX CALCULATIONS CAN USE FUNCTIONAL APPROACH
-
+/**
+ * HOW DO WE GET THESE HARD CODED VALUES OUT? DO THEY BELONG HERE?
+Handler_Graphics_Matrix.prototype.update = function(gfx) {
+    const pos_delta = 0.25;
+    const rot_delta = .005;
+    
+ */
 function Handler_Graphics_Matrix(gfx, camera_location, angle, near_plane, far_plane) {
     const ratio = gfx.gl.canvas.width / gfx.gl.canvas.height;
     this.projectionMatrix = mat4_perspective(angle, ratio, near_plane, far_plane);
@@ -15,11 +21,7 @@ Handler_Graphics_Matrix.prototype.getViewMatrix = function() {
     const rotateX = mat4_rotate_x(null, this.camera_location.x_rot);
     const rotateY = mat4_rotate_y(null, this.camera_location.y_rot);
 
-    var workingRotate1 = mat4.create();
-    mat4.multiply(rotateX, rotateY, workingRotate1);
-
-    var translateMatrix = mat4.create();
-    mat4.identity(translateMatrix);
+    var workingRotate1 = mat4_multiply(rotateX, rotateY);
 
     const translateVector = [
         -this.camera_location.x_pos
@@ -27,12 +29,8 @@ Handler_Graphics_Matrix.prototype.getViewMatrix = function() {
         , -this.camera_location.z_pos
     ];
 
-    mat4.translate(translateMatrix, translateVector);
-
-    var viewMatrix = mat4.create();
-
-    mat4.multiply(workingRotate1, translateMatrix, viewMatrix);
-    //mat4.multiply(translateMatrix, workingRotate1, viewMatrix);
+    const translateMatrix = mat4_translate(translateVector);
+    var viewMatrix = mat4_multiply(workingRotate1, translateMatrix);
     
     //column major
     //https://learnopengl.com/#!Getting-started/Camera
@@ -109,41 +107,6 @@ Handler_Graphics_Matrix.prototype.getViewMatrix = function() {
 
 
     return viewMatrix2;
-}
-
-Handler_Graphics_Matrix.prototype.getViewMatrix2 = function() {
-    //  mat4 camera_setup = rotate_camera_x * rotate_camera_y * translate_camera;
-
-    var identity = mat4.create();
-    mat4.identity(identity);
-
-    var rotateX = mat4.create();
-	var rotateY = mat4.create();
-	var rotateZ = mat4.create();
-
-    mat4.rotateX(identity, this.camera_location.x_rot, rotateX);
-	mat4.rotateY(identity, this.camera_location.y_rot, rotateY);
-
-    var workingRotate1 = mat4.create();
-    mat4.multiply(rotateX, rotateY, workingRotate1);
-
-    var translateMatrix = mat4.create();
-    mat4.identity(translateMatrix);
-
-    const translateVector = [
-        -this.camera_location.x_pos
-        , -this.camera_location.y_pos
-        , this.camera_location.z_pos
-    ];
-
-    mat4.translate(translateMatrix, translateVector);
-
-    var viewMatrix = mat4.create();
-
-    mat4.multiply(workingRotate1, translateMatrix, viewMatrix);
-    //mat4.multiply(translateMatrix, workingRotate1, viewMatrix);
-    
-    return viewMatrix;
 }
 
 Handler_Graphics_Matrix.prototype.update = function(gfx) {

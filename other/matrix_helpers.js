@@ -23,3 +23,15 @@ function mat4_rotate_y(in_matrix, radians) {
     mat4.rotateY(in_matrix, radians, rotate);
     return rotate;
 }
+function mat4_translate(translateVector) {
+    var translateMatrix = mat4.create();
+    mat4.identity(translateMatrix);
+    mat4.translate(translateMatrix, translateVector);
+    return translateMatrix;
+}
+
+function mat4_multiply(a, b) {
+    var mat = mat4.create();
+    mat4.multiply(a, b, mat);
+    return mat;
+}
