@@ -99,12 +99,7 @@ Handler_Graphics_Matrix.prototype.getViewMatrix = function() {
         , 1
     ];
 
-    var viewMatrix2 = mat4.create();
-
-    mat4.multiply(m1, m2, viewMatrix2);
-
-
-    return viewMatrix2;
+    return mat4_multiply(m1, m2);
 }
 
 Handler_Graphics_Matrix.prototype.update = function(gfx) {
