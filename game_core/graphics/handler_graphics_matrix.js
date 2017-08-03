@@ -18,19 +18,17 @@ Handler_Graphics_Matrix.prototype.getProjectionMatrix = function() {
 }
 
 Handler_Graphics_Matrix.prototype.getViewMatrix = function() {
-    const rotateX = mat4_rotate_x(null, this.camera_location.x_rot);
-    const rotateY = mat4_rotate_y(null, this.camera_location.y_rot);
-
-    var workingRotate1 = mat4_multiply(rotateX, rotateY);
-
     const translateVector = [
         -this.camera_location.x_pos
         , -this.camera_location.y_pos
         , -this.camera_location.z_pos
     ];
 
+    const rotateX = mat4_rotate_x(null, this.camera_location.x_rot);
+    const rotateY = mat4_rotate_y(null, this.camera_location.y_rot);
+    const workingRotate1 = mat4_multiply(rotateX, rotateY);
     const translateMatrix = mat4_translate(translateVector);
-    var viewMatrix = mat4_multiply(workingRotate1, translateMatrix);
+    const viewMatrix = mat4_multiply(workingRotate1, translateMatrix);
     
     //column major
     //https://learnopengl.com/#!Getting-started/Camera
