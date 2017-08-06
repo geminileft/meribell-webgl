@@ -33,12 +33,26 @@ void main() {
 `;
 
 const SHADER_COLOR_3D_LIGHTING_FRAGMENT_SHADER = `
+/*
 precision mediump float;
 
 varying vec4 v_Color;
 
 void main() {
   gl_FragColor = v_Color;
+}
+*/
+
+
+precision mediump float;       // Set the default precision to medium. We don't need as high of a
+                               // precision in the fragment shader.
+varying vec4 v_Color;          // This is the color from the vertex shader interpolated across the
+                               // triangle per fragment.
+ 
+// The entry point for our fragment shader.
+void main()
+{
+    gl_FragColor = v_Color;    // Pass the color directly through the pipeline.
 }
 `;
 
@@ -79,6 +93,7 @@ function shader_color_3d_lighting_draw(gl, draw_data) {
   mat4.multiply(draw_data.projectionMatrix, mvMatrix, mvpMatrix);
 
   gl.uniformMatrix4fv(program_obj.u_MVPMatrix, false, mvpMatrix);
+  gl.uniformMatrix4fv(program_obj.u_MVMatrix, false, mvMatrix);
 
   var mvInverse = mat4.create();
   var normalMatrix = mat4.create();
@@ -102,7 +117,7 @@ const shader_color_3d_lighting_shader = {
   , vs: SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER
   , fs: SHADER_COLOR_3D_LIGHTING_FRAGMENT_SHADER
   , attribs: ['a_Position', 'a_Color', 'a_Normal']
-  , uniforms: ['u_MVPMatrix', 'uNormalMatrix']
+  , uniforms: ['u_MVPMatrix', 'u_MVMatrix', 'uNormalMatrix']
   , draw: shader_color_3d_lighting_draw
 };
 
