@@ -2,6 +2,9 @@
 
 const SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER = `
 uniform mat4 u_MVPMatrix;
+uniform mat4 u_MVMatrix;
+uniform vec3 u_LightPos;
+
 uniform mat4 uNormalMatrix;
 
 attribute vec3 a_Position;
@@ -11,7 +14,9 @@ attribute vec3 a_Normal;
 varying vec4 v_Color;
 
 void main() {
-  gl_Position = u_MVPMatrix * vec4(a_Position, 1.0);
+  //vec3 modelViewVertex = vec3(u_MVMatrix * a_Position);
+  vec3 modelViewVertex = vec3(u_MVMatrix * vec4(a_Position, 0.0));
+  vec3 modelViewNormal = vec3(u_MVMatrix * vec4(a_Normal, 0.0));
 
   highp vec3 ambientLight = vec3(0.0, 0.0, 0.0);
   highp vec3 directionalLightColor = vec3(1.0, 1.0, 0.878);
@@ -22,6 +27,8 @@ void main() {
 
   highp vec3 lighting = ambientLight + (directionalLightColor * directional);
   v_Color = vec4(a_Color.rgb * lighting, a_Color.a);
+
+  gl_Position = u_MVPMatrix * vec4(a_Position, 1.0);
 }
 `;
 
