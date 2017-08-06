@@ -2,33 +2,26 @@
 
 const SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER = `
 uniform mat4 u_MVPMatrix;
-uniform mat4 u_MVMatrix;
-uniform vec3 u_LightPos;
+uniform mat4 uNMatrix;
 
-uniform mat4 uNormalMatrix;
-
-attribute vec3 a_Position;
+attribute vec3 aVertexPosition;
 attribute vec4 a_Color;
-attribute vec3 a_Normal;
+attribute vec3 aVertexNormal;
 
 varying vec4 v_Color;
 
 void main() {
-  //vec3 modelViewVertex = vec3(u_MVMatrix * a_Position);
-  vec3 modelViewVertex = vec3(u_MVMatrix * vec4(a_Position, 0.0));
-  vec3 modelViewNormal = vec3(u_MVMatrix * vec4(a_Normal, 0.0));
-
   highp vec3 ambientLight = vec3(0.0, 0.0, 0.0);
   highp vec3 directionalLightColor = vec3(1.0, 1.0, 0.878);
   highp vec3 directionalVector = vec3(0, 0, 1);
 
-  highp vec4 transformedNormal = uNormalMatrix * vec4(a_Normal, 1.0);
+  highp vec4 transformedNormal = uNMatrix * vec4(aVertexNormal, 1.0);
   highp float directional = max(dot(transformedNormal.xyz, directionalVector), 0.0);
 
   highp vec3 lighting = ambientLight + (directionalLightColor * directional);
   v_Color = vec4(a_Color.rgb * lighting, a_Color.a);
 
-  gl_Position = u_MVPMatrix * vec4(a_Position, 1.0);
+  gl_Position = u_MVPMatrix * vec4(aVertexPosition, 1.0);
 }
 `;
 
@@ -62,9 +55,9 @@ function shader_color_3d_lighting_draw(gl, draw_data) {
   const program_obj = this;
   gl.useProgram(program_obj.program);
 
-  gl.enableVertexAttribArray(program_obj.a_Position);
+  gl.enableVertexAttribArray(program_obj.aVertexPosition);
   gl.enableVertexAttribArray(program_obj.a_Color);
-  gl.enableVertexAttribArray(program_obj.a_Normal);
+  gl.enableVertexAttribArray(program_obj.aVertexNormal);
   
   const interleaved = draw_data.interleaved;
   const buffer = gl.createBuffer();
@@ -74,7 +67,7 @@ function shader_color_3d_lighting_draw(gl, draw_data) {
   const INTERLEAVED_SIZE = GL_VERTEX_SIZE + GL_COLOR_SIZE + GL_NORMAL_SIZE;
 
   gl.vertexAttribPointer(
-    program_obj.a_Position, GL_VERTEX_SIZE, gl.FLOAT, false
+    program_obj.aVertexPosition, GL_VERTEX_SIZE, gl.FLOAT, false
     , INTERLEAVED_SIZE * GL_FLOAT_SIZE_BYTES, 0);
 
   gl.vertexAttribPointer(
@@ -82,7 +75,7 @@ function shader_color_3d_lighting_draw(gl, draw_data) {
     , INTERLEAVED_SIZE * GL_FLOAT_SIZE_BYTES, GL_VERTEX_SIZE * GL_FLOAT_SIZE_BYTES);
 
   gl.vertexAttribPointer(
-    program_obj.a_Normal, GL_NORMAL_SIZE, gl.FLOAT, false
+    program_obj.aVertexNormal, GL_NORMAL_SIZE, gl.FLOAT, false
     , INTERLEAVED_SIZE * GL_FLOAT_SIZE_BYTES, (GL_VERTEX_SIZE + GL_COLOR_SIZE) * GL_FLOAT_SIZE_BYTES);
 
   var mvMatrix = mat4.create();
@@ -93,7 +86,6 @@ function shader_color_3d_lighting_draw(gl, draw_data) {
   mat4.multiply(draw_data.projectionMatrix, mvMatrix, mvpMatrix);
 
   gl.uniformMatrix4fv(program_obj.u_MVPMatrix, false, mvpMatrix);
-  gl.uniformMatrix4fv(program_obj.u_MVMatrix, false, mvMatrix);
 
   var mvInverse = mat4.create();
   var normalMatrix = mat4.create();
@@ -101,7 +93,7 @@ function shader_color_3d_lighting_draw(gl, draw_data) {
   mat4.inverse(mvMatrix, mvInverse);
   mat4.transpose(mvInverse, normalMatrix);
 
-  gl.uniformMatrix4fv(program_obj.uNormalMatrix, false, normalMatrix);
+  gl.uniformMatrix4fv(program_obj.uNMatrix, false, normalMatrix);
 
   const draw_ct = interleaved.length / INTERLEAVED_SIZE;
   gl.drawArrays(gl.TRIANGLES, 0, draw_ct);
@@ -116,8 +108,8 @@ const shader_color_3d_lighting_shader = {
   name: 'shader_color_3d_lighting'
   , vs: SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER
   , fs: SHADER_COLOR_3D_LIGHTING_FRAGMENT_SHADER
-  , attribs: ['a_Position', 'a_Color', 'a_Normal']
-  , uniforms: ['u_MVPMatrix', 'u_MVMatrix', 'uNormalMatrix']
+  , attribs: ['aVertexPosition', 'a_Color', 'aVertexNormal']
+  , uniforms: ['u_MVPMatrix', 'uNMatrix']
   , draw: shader_color_3d_lighting_draw
 };
 
