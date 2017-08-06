@@ -9,6 +9,7 @@ attribute vec4 a_Color;
 attribute vec3 aVertexNormal;
 
 varying vec4 v_Color;
+varying vec4 vTransformedNormal;
 
 void main() {
   highp vec3 ambientLight = vec3(0.0, 0.0, 0.0);
@@ -19,23 +20,34 @@ void main() {
   highp float directional = max(dot(transformedNormal.xyz, directionalVector), 0.0);
 
   highp vec3 lighting = ambientLight + (directionalLightColor * directional);
-  v_Color = vec4(a_Color.rgb * lighting, a_Color.a);
-
+  
+  v_Color = a_Color;
   gl_Position = u_MVPMatrix * vec4(aVertexPosition, 1.0);
+  vTransformedNormal = uNMatrix * vec4(aVertexNormal, 1.0);
 }
 `;
 
 const SHADER_COLOR_3D_LIGHTING_FRAGMENT_SHADER = `
-
 precision mediump float;       // Set the default precision to medium. We don't need as high of a
                                // precision in the fragment shader.
 varying vec4 v_Color;          // This is the color from the vertex shader interpolated across the
                                // triangle per fragment.
  
+varying vec4 vTransformedNormal;
+
 // The entry point for our fragment shader.
 void main()
 {
-    gl_FragColor = v_Color;    // Pass the color directly through the pipeline.
+
+  highp vec3 ambientLight = vec3(0.0, 0.0, 0.0);
+  highp vec3 directionalLightColor = vec3(1.0, 1.0, 0.878);
+
+  highp vec3 directionalVector = vec3(0, 0, 1);
+  highp float directional = max(dot(vTransformedNormal.xyz, directionalVector), 0.0);
+
+  highp vec3 lighting = ambientLight + (directionalLightColor * directional);
+
+    gl_FragColor = vec4(v_Color.rgb * lighting, v_Color.a);    // Pass the color directly through the pipeline.
 }
 `;
 
