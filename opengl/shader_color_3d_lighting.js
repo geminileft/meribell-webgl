@@ -26,16 +26,6 @@ void main() {
 `;
 
 const SHADER_COLOR_3D_LIGHTING_FRAGMENT_SHADER = `
-/*
-precision mediump float;
-
-varying vec4 v_Color;
-
-void main() {
-  gl_FragColor = v_Color;
-}
-*/
-
 
 precision mediump float;       // Set the default precision to medium. We don't need as high of a
                                // precision in the fragment shader.
@@ -48,6 +38,47 @@ void main()
     gl_FragColor = v_Color;    // Pass the color directly through the pipeline.
 }
 `;
+
+/*
+const SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER = `
+uniform mat4 u_MVPMatrix;
+uniform mat4 uNMatrix;
+
+attribute vec3 aVertexPosition;
+attribute vec4 a_Color;
+attribute vec3 aVertexNormal;
+
+varying vec4 v_Color;
+
+void main() {
+  highp vec3 ambientLight = vec3(0.0, 0.0, 0.0);
+  highp vec3 directionalLightColor = vec3(1.0, 1.0, 0.878);
+  highp vec3 directionalVector = vec3(0, 0, 1);
+
+  highp vec4 transformedNormal = uNMatrix * vec4(aVertexNormal, 1.0);
+  highp float directional = max(dot(transformedNormal.xyz, directionalVector), 0.0);
+
+  highp vec3 lighting = ambientLight + (directionalLightColor * directional);
+  v_Color = vec4(a_Color.rgb * lighting, a_Color.a);
+
+  gl_Position = u_MVPMatrix * vec4(aVertexPosition, 1.0);
+}
+`;
+
+const SHADER_COLOR_3D_LIGHTING_FRAGMENT_SHADER = `
+
+precision mediump float;       // Set the default precision to medium. We don't need as high of a
+                               // precision in the fragment shader.
+varying vec4 v_Color;          // This is the color from the vertex shader interpolated across the
+                               // triangle per fragment.
+ 
+// The entry point for our fragment shader.
+void main()
+{
+    gl_FragColor = v_Color;    // Pass the color directly through the pipeline.
+}
+`;
+*/
 
 function shader_color_3d_lighting_draw(gl, draw_data) {
   gl.enable(gl.DEPTH_TEST);
