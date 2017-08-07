@@ -38,7 +38,7 @@ void main()
   highp vec3 ambientLight = vec3(0.0, 0.0, 0.0);
   highp vec3 directionalLightColor = vec3(1.0, 1.0, 0.878);
 
-  highp vec3 directionalVector = vec3(0, 0, -25);
+  highp vec3 directionalVector = vec3(-3, 0, -25);
   vec3 lightDirection = normalize(directionalVector - vPosition.xyz);
   highp float directional = max(dot(vTransformedNormal.xyz, lightDirection), 0.0);
 
