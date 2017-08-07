@@ -2,6 +2,7 @@
 
 const SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER = `
 uniform mat4 u_MVPMatrix;
+uniform mat4 uMVMatrix;
 uniform mat4 uNMatrix;
 
 attribute vec3 aVertexPosition;
@@ -10,20 +11,13 @@ attribute vec3 aVertexNormal;
 
 varying vec4 v_Color;
 varying vec4 vTransformedNormal;
+varying vec4 vPosition;
 
-void main() {
-  highp vec3 ambientLight = vec3(0.0, 0.0, 0.0);
-  highp vec3 directionalLightColor = vec3(1.0, 1.0, 0.878);
-  highp vec3 directionalVector = vec3(0, 0, 1);
-
-  highp vec4 transformedNormal = uNMatrix * vec4(aVertexNormal, 1.0);
-  highp float directional = max(dot(transformedNormal.xyz, directionalVector), 0.0);
-
-  highp vec3 lighting = ambientLight + (directionalLightColor * directional);
-  
+void main() {  
   v_Color = a_Color;
   gl_Position = u_MVPMatrix * vec4(aVertexPosition, 1.0);
   vTransformedNormal = uNMatrix * vec4(aVertexNormal, 1.0);
+  vPosition = uMVMatrix * vec4(aVertexPosition, 1.0);
 }
 `;
 
@@ -34,16 +28,25 @@ varying vec4 v_Color;          // This is the color from the vertex shader inter
                                // triangle per fragment.
  
 varying vec4 vTransformedNormal;
+varying vec4 vPosition;
 
 // The entry point for our fragment shader.
 void main()
 {
 
+
   highp vec3 ambientLight = vec3(0.0, 0.0, 0.0);
   highp vec3 directionalLightColor = vec3(1.0, 1.0, 0.878);
 
+  highp vec3 directionalVector = vec3(0, 0, -25);
+  vec3 lightDirection = normalize(directionalVector - vPosition.xyz);
+  highp float directional = max(dot(vTransformedNormal.xyz, lightDirection), 0.0);
+
+/*
   highp vec3 directionalVector = vec3(0, 0, 1);
+  vec3 lightDirection = normalize(directionalVector - vPosition.xyz);
   highp float directional = max(dot(vTransformedNormal.xyz, directionalVector), 0.0);
+*/
 
   highp vec3 lighting = ambientLight + (directionalLightColor * directional);
 
@@ -137,6 +140,7 @@ function shader_color_3d_lighting_draw(gl, draw_data) {
   mat4.transpose(mvInverse, normalMatrix);
 
   gl.uniformMatrix4fv(program_obj.uNMatrix, false, normalMatrix);
+  gl.uniformMatrix4fv(program_obj.uMVMatrix, false, mvMatrix);
 
   const draw_ct = interleaved.length / INTERLEAVED_SIZE;
   gl.drawArrays(gl.TRIANGLES, 0, draw_ct);
@@ -152,7 +156,7 @@ const shader_color_3d_lighting_shader = {
   , vs: SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER
   , fs: SHADER_COLOR_3D_LIGHTING_FRAGMENT_SHADER
   , attribs: ['aVertexPosition', 'a_Color', 'aVertexNormal']
-  , uniforms: ['u_MVPMatrix', 'uNMatrix']
+  , uniforms: ['u_MVPMatrix', 'uNMatrix', 'uMVMatrix']
   , draw: shader_color_3d_lighting_draw
 };
 
