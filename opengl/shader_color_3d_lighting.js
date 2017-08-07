@@ -1,5 +1,6 @@
 //TODO: SHADER HAS HARD CODING
 
+/*
 const SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER = `
 uniform mat4 u_MVPMatrix;
 uniform mat4 uMVMatrix;
@@ -42,21 +43,16 @@ void main()
   vec3 lightDirection = normalize(directionalVector - vPosition.xyz);
   highp float directional = max(dot(vTransformedNormal.xyz, lightDirection), 0.0);
 
-/*
-  highp vec3 directionalVector = vec3(0, 0, 1);
-  vec3 lightDirection = normalize(directionalVector - vPosition.xyz);
-  highp float directional = max(dot(vTransformedNormal.xyz, directionalVector), 0.0);
-*/
-
   highp vec3 lighting = ambientLight + (directionalLightColor * directional);
 
     gl_FragColor = vec4(v_Color.rgb * lighting, v_Color.a);    // Pass the color directly through the pipeline.
 }
 `;
+*/
 
-/*
 const SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER = `
 uniform mat4 u_MVPMatrix;
+uniform mat4 uMVMatrix;
 uniform mat4 uNMatrix;
 
 attribute vec3 aVertexPosition;
@@ -66,6 +62,7 @@ attribute vec3 aVertexNormal;
 varying vec4 v_Color;
 
 void main() {
+  mat4 _uMVMatrix = uMVMatrix;
   highp vec3 ambientLight = vec3(0.0, 0.0, 0.0);
   highp vec3 directionalLightColor = vec3(1.0, 1.0, 0.878);
   highp vec3 directionalVector = vec3(0, 0, 1);
@@ -93,7 +90,6 @@ void main()
     gl_FragColor = v_Color;    // Pass the color directly through the pipeline.
 }
 `;
-*/
 
 function shader_color_3d_lighting_draw(gl, draw_data) {
   gl.enable(gl.DEPTH_TEST);
