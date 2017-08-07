@@ -48,27 +48,29 @@ void main()
 }
 `;
 
-
 /*
 const SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER = `
+attribute vec3 aVertexPosition;
+attribute vec3 aVertexNormal;
+attribute vec4 a_Color;
+
 uniform mat4 u_MVPMatrix;
 uniform mat4 uMVMatrix;
 uniform mat4 uNMatrix;
 
-attribute vec3 aVertexPosition;
-attribute vec4 a_Color;
-attribute vec3 aVertexNormal;
 
 varying vec4 v_Color;
 
 void main() {
+  highp vec3 uAmbientColor = vec3(0.0, 0.0, 0.0);
+  vec3 uPointLightingLocation = vec3(0, 0, -25);
+  highp vec3 uPointLightingColor = vec3(1.0, 1.0, 0.878);
+
+
   mat4 _uMVMatrix = uMVMatrix;
-  highp vec3 ambientLight = vec3(0.0, 0.0, 0.0);
-  highp vec3 directionalLightColor = vec3(1.0, 1.0, 0.878);
   highp vec3 directionalVector = vec3(0, 0, 1);
 
   vec4 mvPosition = uMVMatrix * vec4(aVertexPosition, 1.0);
-  vec3 uPointLightingLocation = vec3(0, 0, -25);
   vec3 lightDirection = normalize(uPointLightingLocation - mvPosition.xyz);
 
   //lightDirection = vec3(0, 0, 1);
@@ -76,7 +78,7 @@ void main() {
   highp vec4 transformedNormal = uNMatrix * vec4(aVertexNormal, 1.0);
   highp float directional = max(dot(transformedNormal.xyz, lightDirection), 0.0);
 
-  highp vec3 lighting = ambientLight + (directionalLightColor * directional);
+  highp vec3 lighting = uAmbientColor + (uPointLightingColor * directional);
   v_Color = vec4(a_Color.rgb * lighting, a_Color.a);
 
   gl_Position = u_MVPMatrix * vec4(aVertexPosition, 1.0);
