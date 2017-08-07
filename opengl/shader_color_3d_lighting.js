@@ -1,6 +1,5 @@
 //TODO: SHADER HAS HARD CODING
 
-
 const SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER = `
 uniform mat4 u_MVPMatrix;
 uniform mat4 uMVMatrix;
@@ -49,6 +48,7 @@ void main()
 }
 `;
 
+
 /*
 const SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER = `
 uniform mat4 u_MVPMatrix;
@@ -71,6 +71,8 @@ void main() {
   vec3 uPointLightingLocation = vec3(0, 0, -25);
   vec3 lightDirection = normalize(uPointLightingLocation - mvPosition.xyz);
 
+  //lightDirection = vec3(0, 0, 1);
+
   highp vec4 transformedNormal = uNMatrix * vec4(aVertexNormal, 1.0);
   highp float directional = max(dot(transformedNormal.xyz, lightDirection), 0.0);
 
@@ -80,7 +82,6 @@ void main() {
   gl_Position = u_MVPMatrix * vec4(aVertexPosition, 1.0);
 }
 `;
-
 const SHADER_COLOR_3D_LIGHTING_FRAGMENT_SHADER = `
 
 precision mediump float;       // Set the default precision to medium. We don't need as high of a
