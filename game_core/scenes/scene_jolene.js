@@ -65,19 +65,19 @@ function Scene_Jolene(gfx) {
 
 /**************end row */
 
-  game_object = new Game_Object(-2, 2, 2);
+  game_object = new Game_Object(-2, 2, -2);
   handler_graphics = new Handler_Graphics_3dbox(0, 0, [[1.0, 1.0, 1.0, 1.0]]
     , matrix_handler);
   game_object.addHandler(handler_graphics);
   game_objects.push(game_object);
 
-  game_object = new Game_Object(-4, 2, 2);
+  game_object = new Game_Object(-4, 2, -2);
   handler_graphics = new Handler_Graphics_3dbox(0, 0
     , color_range, matrix_handler);
   game_object.addHandler(handler_graphics);
   game_objects.push(game_object);
 
-  game_object = new Game_Object(-6, 2, 2);
+  game_object = new Game_Object(-6, 2, -2);
   handler_graphics = new Handler_Graphics_3dbox(0, 0, [[1.0, 1.0, 1.0, 1.0]]
     , matrix_handler);
   game_object.addHandler(handler_graphics);
@@ -85,25 +85,25 @@ function Scene_Jolene(gfx) {
 
 /*******end row */
 
-  game_object = new Game_Object(0, 4, 2);
+  game_object = new Game_Object(0, 4, -2);
   handler_graphics = new Handler_Graphics_3dbox(0, 0
     , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
   game_object.addHandler(handler_graphics);
   game_objects.push(game_object);
 
-  game_object = new Game_Object(-2, 4, 2);
+  game_object = new Game_Object(-2, 4, -2);
   handler_graphics = new Handler_Graphics_3dbox(0, 0, color_range
     , matrix_handler);
   game_object.addHandler(handler_graphics);
   game_objects.push(game_object);
 
-  game_object = new Game_Object(-4, 4, 2);
+  game_object = new Game_Object(-4, 4, -2);
   handler_graphics = new Handler_Graphics_3dbox(0, 0
     , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
   game_object.addHandler(handler_graphics);
   game_objects.push(game_object);
 
-  game_object = new Game_Object(-6, 4, 2);
+  game_object = new Game_Object(-6, 4, -2);
   handler_graphics = new Handler_Graphics_3dbox(0, 0, color_range
     , matrix_handler);
   game_object.addHandler(handler_graphics);
@@ -111,13 +111,13 @@ function Scene_Jolene(gfx) {
 
 /********end row */
 
-  game_object = new Game_Object(0, 6, 4);
+  game_object = new Game_Object(0, 6, -4);
   handler_graphics = new Handler_Graphics_3dbox(0, 0, color_range
     , matrix_handler);
   game_object.addHandler(handler_graphics);
   game_objects.push(game_object);
 
-  game_object = new Game_Object(-2, 6, 4);
+  game_object = new Game_Object(-2, 6, -4);
   handler_graphics = new Handler_Graphics_3dbox(0, 0
     , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
   game_object.addHandler(handler_graphics);
@@ -125,19 +125,19 @@ function Scene_Jolene(gfx) {
 
 /*******end row */
 
-  game_object = new Game_Object(0, 8, 4);
+  game_object = new Game_Object(0, 8, -4);
   handler_graphics = new Handler_Graphics_3dbox(0, 0
     , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
   game_object.addHandler(handler_graphics);
   game_objects.push(game_object);
 
-  game_object = new Game_Object(-2, 8, 4);
+  game_object = new Game_Object(-2, 8, -4);
   handler_graphics = new Handler_Graphics_3dbox(0, 0, color_range
     , matrix_handler);
   game_object.addHandler(handler_graphics);
   game_objects.push(game_object);
 
-  game_object = new Game_Object(-4, 8, 4);
+  game_object = new Game_Object(-4, 8, -4);
   handler_graphics = new Handler_Graphics_3dbox(0, 0
     , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
   game_object.addHandler(handler_graphics);
@@ -145,19 +145,19 @@ function Scene_Jolene(gfx) {
 
 /*******end row */
 
-  game_object = new Game_Object(0, 10, 6);
+  game_object = new Game_Object(0, 10, -6);
   handler_graphics = new Handler_Graphics_3dbox(0, 0
     , color_range, matrix_handler);
   game_object.addHandler(handler_graphics);
   game_objects.push(game_object);
 
-  game_object = new Game_Object(-2, 10, 6);
+  game_object = new Game_Object(-2, 10, -6);
   handler_graphics = new Handler_Graphics_3dbox(0, 0, [[1.0, 1.0, 1.0, 1.0]]
     , matrix_handler);
   game_object.addHandler(handler_graphics);
   game_objects.push(game_object);
 
-  game_object = new Game_Object(-6, 10, 4);
+  game_object = new Game_Object(-6, 10, -4);
   handler_graphics = new Handler_Graphics_3dbox(0, 0, color_range
     , matrix_handler);
   game_object.addHandler(handler_graphics);
@@ -165,19 +165,19 @@ function Scene_Jolene(gfx) {
 
 /*******end row */
 
-  game_object = new Game_Object(0, 12, 6);
+  game_object = new Game_Object(0, 12, -6);
   handler_graphics = new Handler_Graphics_3dbox(0, 0
     , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
   game_object.addHandler(handler_graphics);
   game_objects.push(game_object);
 
-  game_object = new Game_Object(-2, 12, 6);
+  game_object = new Game_Object(-2, 12, -6);
   handler_graphics = new Handler_Graphics_3dbox(0, 0, color_range
     , matrix_handler);
   game_object.addHandler(handler_graphics);
   game_objects.push(game_object);
 
-  game_object = new Game_Object(-6, 12, 4);
+  game_object = new Game_Object(-6, 12, -4);
   handler_graphics = new Handler_Graphics_3dbox(0, 0, [[1.0, 1.0, 1.0, 1.0]]
     , matrix_handler);
   game_object.addHandler(handler_graphics);
@@ -185,7 +185,7 @@ function Scene_Jolene(gfx) {
 
 /*******end row */
 
-  game_object = new Game_Object(0, 14, 6);
+  game_object = new Game_Object(0, 14, -6);
   handler_graphics = new Handler_Graphics_3dbox(0, 0
     , [[1.0, 1.0, 0.0, 1.0]], matrix_handler);
   game_object.addHandler(handler_graphics);

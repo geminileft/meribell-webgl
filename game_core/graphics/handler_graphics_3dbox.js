@@ -38,7 +38,7 @@ Handler_Graphics_3dbox.prototype.update = function(gfx) {
 
 	var modelTranslateMatrix = mat4.create();
 	mat4.identity(modelTranslateMatrix);
-	mat4.translate(modelTranslateMatrix, [x, y, -z]);
+	mat4.translate(modelTranslateMatrix, [x, y, z]);
 
 	mat4.multiply(modelTranslateMatrix, rotateX, working);
 	mat4.multiply(working, rotateY, modelMatrix);
