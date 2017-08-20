@@ -26,7 +26,7 @@ precision mediump float;
 
 varying vec4 v_Color;
 
-uniform vec3 uLightPosition;
+uniform vec4 uLightPosition;
 uniform vec3 uLightColor;
 uniform vec3 uAmbientLightColor;
 
@@ -36,8 +36,8 @@ varying vec4 vPosition;
 // The entry point for our fragment shader.
 void main()
 {
-  vec3 lightDirection = normalize(uLightPosition - vPosition.xyz);
-  float directional = max(dot(vTransformedNormal.xyz, lightDirection), 0.0);
+  vec4 lightDirection = normalize(uLightPosition - vPosition);
+  float directional = max(dot(vTransformedNormal, lightDirection), 0.0);
   vec3 lighting = uAmbientLightColor + (uLightColor * directional);
   gl_FragColor = vec4(v_Color.rgb * lighting, v_Color.a);    // Pass the color directly through the pipeline.
 }
@@ -90,8 +90,8 @@ function shader_color_3d_lighting_draw(gl, draw_data) {
   gl.uniformMatrix4fv(program_obj.uNMatrix, false, normalMatrix);
   gl.uniformMatrix4fv(program_obj.uMVMatrix, false, mvMatrix);
 
-  var lightPosition = vec3.create([-3, 0, -25]);
-  gl.uniform3fv(program_obj.uLightPosition, lightPosition);
+  var lightPosition = [-3, 0, -25, 1];
+  gl.uniform4fv(program_obj.uLightPosition, lightPosition);
   gl.uniform3fv(program_obj.uLightColor, [1, 1, .878]);
   gl.uniform3fv(program_obj.uAmbientLightColor, [.25, .25, .25]);
 
