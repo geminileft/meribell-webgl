@@ -35,17 +35,17 @@ void main()
 {
 
 
-  highp vec3 ambientLight = vec3(0.1, 0.1, 0.1);
-  highp vec3 directionalLightColor = vec3(1.0, 1.0, 0.878);
+  vec3 ambientLight = vec3(0.1, 0.1, 0.1);
+  vec3 directionalLightColor = vec3(1.0, 1.0, 0.878);
 
-  highp vec3 directionalVector = vec3(-3, 0, -25);
+  vec3 directionalVector = vec3(-3, 0, -25);
   vec3 lightDirection = normalize(directionalVector - vPosition.xyz);
   //vec3 lightDirection = vec3(0, 0, 1);
-  highp float directional = max(dot(vTransformedNormal.xyz, lightDirection), 0.0);
+  float directional = max(dot(vTransformedNormal.xyz, lightDirection), 0.0);
 
-  highp vec3 lighting = ambientLight + (directionalLightColor * directional);
+  vec3 lighting = ambientLight + (directionalLightColor * directional);
 
-    gl_FragColor = vec4(v_Color.rgb * lighting, v_Color.a);    // Pass the color directly through the pipeline.
+  gl_FragColor = vec4(v_Color.rgb * lighting, v_Color.a);    // Pass the color directly through the pipeline.
 }
 `;
 
