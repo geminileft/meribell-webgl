@@ -35,7 +35,7 @@ varying vec4 vPosition;
 // The entry point for our fragment shader.
 void main()
 {
-
+  vec3 _uDirectionalVector = uDirectionalVector;
 
   vec3 ambientLight = vec3(0.1, 0.1, 0.1);
   vec3 directionalLightColor = vec3(1.0, 1.0, 0.878);
@@ -163,7 +163,7 @@ const shader_color_3d_lighting_shader = {
   , vs: SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER
   , fs: SHADER_COLOR_3D_LIGHTING_FRAGMENT_SHADER
   , attribs: ['aVertexPosition', 'a_Color', 'aVertexNormal']
-  , uniforms: ['u_MVPMatrix', 'uNMatrix', 'uMVMatrix']
+  , uniforms: ['u_MVPMatrix', 'uNMatrix', 'uMVMatrix', 'uDirectionalVector']
   , draw: shader_color_3d_lighting_draw
 };
 
