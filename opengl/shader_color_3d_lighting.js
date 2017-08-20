@@ -38,7 +38,7 @@ void main()
 {
   vec4 tLightPosition = uVMatrix * uLightPosition;
 
-  vec4 lightDirection = normalize(tLightPosition - vPosition);
+  vec4 lightDirection = normalize(uLightPosition - vPosition);
   float directional = max(dot(vTransformedNormal, lightDirection), 0.0);
   vec3 lighting = uAmbientLightColor + (uLightColor * directional);
   gl_FragColor = vec4(v_Color.rgb * lighting, v_Color.a);    // Pass the color directly through the pipeline.
