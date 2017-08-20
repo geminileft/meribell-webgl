@@ -90,7 +90,8 @@ function shader_color_3d_lighting_draw(gl, draw_data) {
   gl.uniformMatrix4fv(program_obj.uNMatrix, false, normalMatrix);
   gl.uniformMatrix4fv(program_obj.uMVMatrix, false, mvMatrix);
 
-  gl.uniform3fv(program_obj.uLightPosition, [-3, 0, -25]);
+  var lightPosition = vec3.create([-3, 0, -25]);
+  gl.uniform3fv(program_obj.uLightPosition, lightPosition);
   gl.uniform3fv(program_obj.uLightColor, [1, 1, .878]);
   gl.uniform3fv(program_obj.uAmbientLightColor, [.25, .25, .25]);
 
