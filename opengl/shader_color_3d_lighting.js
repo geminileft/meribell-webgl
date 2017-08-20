@@ -27,7 +27,7 @@ precision mediump float;       // Set the default precision to medium. We don't 
 varying vec4 v_Color;          // This is the color from the vertex shader interpolated across the
                                // triangle per fragment.
 
-uniform vec3 uDirectionalVector;
+uniform vec3 uLightPosition;
 
 varying vec4 vTransformedNormal;
 varying vec4 vPosition;
@@ -38,7 +38,7 @@ void main()
   vec3 ambientLight = vec3(0.1, 0.1, 0.1);
   vec3 directionalLightColor = vec3(1.0, 1.0, 0.878);
 
-  vec3 lightDirection = normalize(uDirectionalVector - vPosition.xyz);
+  vec3 lightDirection = normalize(uLightPosition - vPosition.xyz);
   //vec3 lightDirection = vec3(0, 0, 1);
   float directional = max(dot(vTransformedNormal.xyz, lightDirection), 0.0);
 
@@ -145,7 +145,7 @@ function shader_color_3d_lighting_draw(gl, draw_data) {
 
   gl.uniformMatrix4fv(program_obj.uNMatrix, false, normalMatrix);
   gl.uniformMatrix4fv(program_obj.uMVMatrix, false, mvMatrix);
-  gl.uniform3fv(program_obj.uDirectionalVector, [-3, 0, -25]);
+  gl.uniform3fv(program_obj.uLightPosition, [-3, 0, -25]);
 
   const draw_ct = interleaved.length / INTERLEAVED_SIZE;
   gl.drawArrays(gl.TRIANGLES, 0, draw_ct);
@@ -161,7 +161,7 @@ const shader_color_3d_lighting_shader = {
   , vs: SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER
   , fs: SHADER_COLOR_3D_LIGHTING_FRAGMENT_SHADER
   , attribs: ['aVertexPosition', 'a_Color', 'aVertexNormal']
-  , uniforms: ['u_MVPMatrix', 'uNMatrix', 'uMVMatrix', 'uDirectionalVector']
+  , uniforms: ['u_MVPMatrix', 'uNMatrix', 'uMVMatrix', 'uLightPosition']
   , draw: shader_color_3d_lighting_draw
 };
 
