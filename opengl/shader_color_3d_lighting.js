@@ -35,13 +35,10 @@ varying vec4 vPosition;
 // The entry point for our fragment shader.
 void main()
 {
-  vec3 _uDirectionalVector = uDirectionalVector;
-
   vec3 ambientLight = vec3(0.1, 0.1, 0.1);
   vec3 directionalLightColor = vec3(1.0, 1.0, 0.878);
 
-  vec3 directionalVector = vec3(-3, 0, -25);
-  vec3 lightDirection = normalize(directionalVector - vPosition.xyz);
+  vec3 lightDirection = normalize(uDirectionalVector - vPosition.xyz);
   //vec3 lightDirection = vec3(0, 0, 1);
   float directional = max(dot(vTransformedNormal.xyz, lightDirection), 0.0);
 
@@ -148,6 +145,7 @@ function shader_color_3d_lighting_draw(gl, draw_data) {
 
   gl.uniformMatrix4fv(program_obj.uNMatrix, false, normalMatrix);
   gl.uniformMatrix4fv(program_obj.uMVMatrix, false, mvMatrix);
+  gl.uniform3fv(program_obj.uDirectionalVector, [-3, 0, -25]);
 
   const draw_ct = interleaved.length / INTERLEAVED_SIZE;
   gl.drawArrays(gl.TRIANGLES, 0, draw_ct);
