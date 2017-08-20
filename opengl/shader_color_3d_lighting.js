@@ -26,7 +26,9 @@ precision mediump float;       // Set the default precision to medium. We don't 
                                // precision in the fragment shader.
 varying vec4 v_Color;          // This is the color from the vertex shader interpolated across the
                                // triangle per fragment.
- 
+
+uniform vec3 uDirectionalVector;
+
 varying vec4 vTransformedNormal;
 varying vec4 vPosition;
 
