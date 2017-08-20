@@ -24,19 +24,21 @@ void main() {
 const SHADER_COLOR_3D_LIGHTING_FRAGMENT_SHADER = `
 precision mediump float;
 
-varying vec4 v_Color;
-
+uniform mat4 uVMatrix;
 uniform vec4 uLightPosition;
 uniform vec3 uLightColor;
 uniform vec3 uAmbientLightColor;
 
 varying vec4 vTransformedNormal;
 varying vec4 vPosition;
+varying vec4 v_Color;
 
 // The entry point for our fragment shader.
 void main()
 {
-  vec4 lightDirection = normalize(uLightPosition - vPosition);
+  vec4 tLightPosition = uVMatrix * uLightPosition;
+
+  vec4 lightDirection = normalize(tLightPosition - vPosition);
   float directional = max(dot(vTransformedNormal, lightDirection), 0.0);
   vec3 lighting = uAmbientLightColor + (uLightColor * directional);
   gl_FragColor = vec4(v_Color.rgb * lighting, v_Color.a);    // Pass the color directly through the pipeline.
@@ -89,6 +91,7 @@ function shader_color_3d_lighting_draw(gl, draw_data) {
 
   gl.uniformMatrix4fv(program_obj.uNMatrix, false, normalMatrix);
   gl.uniformMatrix4fv(program_obj.uMVMatrix, false, mvMatrix);
+  gl.uniformMatrix4fv(program_obj.uVMatrix, false, draw_data.viewMatrix);
 
   var lightPosition = [-3, 0, -25, 1];
   gl.uniform4fv(program_obj.uLightPosition, lightPosition);
@@ -109,7 +112,7 @@ const shader_color_3d_lighting_shader = {
   , vs: SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER
   , fs: SHADER_COLOR_3D_LIGHTING_FRAGMENT_SHADER
   , attribs: ['aVertexPosition', 'a_Color', 'aVertexNormal']
-  , uniforms: ['u_MVPMatrix', 'uNMatrix', 'uMVMatrix'
+  , uniforms: ['u_MVPMatrix', 'uNMatrix', 'uMVMatrix', 'uVMatrix'
     , 'uLightPosition', 'uAmbientLightColor', 'uLightColor']
   , draw: shader_color_3d_lighting_draw
 };
