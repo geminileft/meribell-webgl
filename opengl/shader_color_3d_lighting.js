@@ -36,7 +36,7 @@ varying vec4 v_Color;
 // The entry point for our fragment shader.
 void main()
 {
-  vec4 tLightPosition = uVMatrix * uLightPosition;
+  vec4 tLightPosition = normalize(uVMatrix * uLightPosition);
 
   vec4 lightDirection = normalize(uLightPosition - vPosition);
   float directional = max(dot(vTransformedNormal, lightDirection), 0.0);
