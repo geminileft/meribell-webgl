@@ -6,6 +6,7 @@ precision mediump float;
 uniform mat4 u_MVPMatrix;
 uniform mat4 uMVMatrix;
 uniform mat4 uVMatrix;
+uniform mat4 uNMatrix;
 
 attribute vec3 aVertexPosition;
 attribute vec4 a_Color;
@@ -18,7 +19,7 @@ varying vec4 vPosition;
 void main() {  
   v_Color = a_Color;
   gl_Position = u_MVPMatrix * vec4(aVertexPosition, 1.0);
-  vTransformedNormal = vec4(aVertexNormal, 0.0);
+  vTransformedNormal = uNMatrix * vec4(aVertexNormal, 0.0);
   vPosition = uMVMatrix * vec4(aVertexPosition, 1.0);
 }
 `;
@@ -30,7 +31,6 @@ uniform mat4 uVMatrix;
 uniform vec4 uLightPosition;
 uniform vec3 uLightColor;
 uniform vec3 uAmbientLightColor;
-uniform mat4 uNMatrix;
 
 varying vec4 vTransformedNormal;
 varying vec4 vPosition;
@@ -39,7 +39,7 @@ varying vec4 v_Color;
 // The entry point for our fragment shader.
 void main()
 {
-  vec4 normal = uNMatrix * vTransformedNormal;
+  vec4 normal = vTransformedNormal;
   vec4 tLightPosition = normalize(uVMatrix * uLightPosition);
 
   vec4 lightDirection = normalize(uLightPosition - vPosition);
