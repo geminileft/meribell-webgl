@@ -1,8 +1,11 @@
 //TODO: SHADER HAS HARD CODING
 
 const SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER = `
+precision mediump float;
+
 uniform mat4 u_MVPMatrix;
 uniform mat4 uMVMatrix;
+uniform mat4 uVMatrix;
 
 attribute vec3 aVertexPosition;
 attribute vec4 a_Color;

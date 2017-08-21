@@ -12,7 +12,8 @@ function createShader(gl, shader_type, source) {
     gl.shaderSource(shader, source);
     gl.compileShader(shader);
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        alert("Error compiling shader source!");
+      const error_msg = gl.getShaderInfoLog(shader);
+      alert("Error compiling shader source!\n" + error_msg);
     }
     return shader;
 }
@@ -25,7 +26,7 @@ function createProgram(gl, vertex_source, fragment_source) {
   gl.attachShader(programObj, fragment_shader);
   gl.linkProgram(programObj);
   if (!gl.getProgramParameter(programObj, gl.LINK_STATUS)) {
-    var info = gl.getProgramInfoLog(program);
+    var info = gl.getProgramInfoLog(programObj);
     alert("Could not initialise shaders with error: " + info);
   }
   return programObj;
