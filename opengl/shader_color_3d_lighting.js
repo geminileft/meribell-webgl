@@ -100,7 +100,8 @@ function shader_color_3d_lighting_draw(gl, draw_data) {
   var lightPosition = [-3, 0, -25, 1];
   gl.uniform4fv(program_obj.uLightPosition, lightPosition);
   gl.uniform3fv(program_obj.uLightColor, [1, 1, .878]);
-  gl.uniform3fv(program_obj.uAmbientLightColor, [.25, .25, .25]);
+  //gl.uniform3fv(program_obj.uAmbientLightColor, [.25, .25, .25]);
+  gl.uniform3fv(program_obj.uAmbientLightColor, [.0, .0, .0]);
 
   const draw_ct = interleaved.length / INTERLEAVED_SIZE;
   gl.drawArrays(gl.TRIANGLES, 0, draw_ct);
