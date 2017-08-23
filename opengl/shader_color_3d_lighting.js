@@ -49,6 +49,7 @@ void main()
 
   vec3 lc = uLightColor;
   //vec3 lighting = uAmbientLightColor + specLight;
+  //vec3 lighting = uAmbientLightColor + (uLightColor * directional);
   vec3 lighting = uAmbientLightColor + (uLightColor * directional) + specLight;
   gl_FragColor = vec4(vColor.rgb * lighting, vColor.a);    // Pass the color directly through the pipeline.
 }
