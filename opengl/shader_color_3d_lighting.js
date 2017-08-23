@@ -41,12 +41,22 @@ varying vec4 v_Color;
 // The entry point for our fragment shader.
 void main()
 {
-  vec4 normal = vTransformedNormal;
+  //may need to normalize below
   vec4 tLightPosition = normalize(uVMatrix * uLightPosition);
 
   vec4 lightDirection = normalize(uLightPosition - vPosition);
-  float directional = max(dot(normal, lightDirection), 0.0);
-  vec3 lighting = uAmbientLightColor + (uLightColor * directional);
+  float directional = clamp(dot(vTransformedNormal, lightDirection), 0.0, 1.0);
+
+  vec3 reflectedVector = reflect(-lightDirection.xyz, vTransformedNormal.xyz);
+  vec3 eyeVector = normalize(uLightPosition.xyz - vPosition.xyz);
+  float s = clamp(dot(reflectedVector, eyeVector), 0.0, 1.0);
+  s = pow(s, 50.0);
+
+  vec3 specLight = vec3(s, 0.0, 0.0);
+
+  vec3 lc = uLightColor;
+  //vec3 lighting = uAmbientLightColor + specLight;
+  vec3 lighting = uAmbientLightColor + (uLightColor * directional) + specLight;
   gl_FragColor = vec4(v_Color.rgb * lighting, v_Color.a);    // Pass the color directly through the pipeline.
 }
 `;
@@ -105,7 +115,7 @@ function shader_color_3d_lighting_draw(gl, draw_data) {
   gl.uniform4fv(program_obj.uLightPosition, lightPosition);
   gl.uniform3fv(program_obj.uLightColor, [1, 1, .878]);
   //gl.uniform3fv(program_obj.uAmbientLightColor, [.25, .25, .25]);
-  gl.uniform3fv(program_obj.uAmbientLightColor, [.0, .0, .0]);
+  gl.uniform3fv(program_obj.uAmbientLightColor, [.1, .1, .1]);
 
   const draw_ct = interleaved.length / INTERLEAVED_SIZE;
   gl.drawArrays(gl.TRIANGLES, 0, draw_ct);

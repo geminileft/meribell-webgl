@@ -42,8 +42,8 @@ function Scene_Jolene(gfx) {
   handler_graphics = new Handler_Graphics_3dbox(0, 0
     , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
   game_object.addHandler(handler_graphics);
-  //handler_logic = new Handler_Logic_Movement();
-  //game_object.addHandler(handler_logic);
+  handler_logic = new Handler_Logic_Movement();
+  game_object.addHandler(handler_logic);
   game_objects.push(game_object);
 
   return game_objects;
