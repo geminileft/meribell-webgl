@@ -4,7 +4,6 @@ const SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER = `
 precision mediump float;
 
 uniform mat4 u_MVPMatrix;
-uniform mat4 uMVMatrix;
 uniform mat4 uVMatrix;
 uniform mat4 uMMatrix;
 uniform mat4 uNMatrix;
@@ -21,7 +20,6 @@ void main() {
   v_Color = a_Color;
   gl_Position = u_MVPMatrix * vec4(aVertexPosition, 1.0);
   vTransformedNormal = uNMatrix * vec4(aVertexNormal, 0.0);
-  vec4 oldvPosition = uMVMatrix * vec4(aVertexPosition, 1.0);
   vPosition = uMMatrix * vec4(aVertexPosition, 1.0);
 }
 `;
@@ -107,7 +105,6 @@ function shader_color_3d_lighting_draw(gl, draw_data) {
   mat4.transpose(mvInverse, normalMatrix);
 
   gl.uniformMatrix4fv(program_obj.uNMatrix, false, normalMatrix);
-  gl.uniformMatrix4fv(program_obj.uMVMatrix, false, mvMatrix);
   gl.uniformMatrix4fv(program_obj.uVMatrix, false, draw_data.viewMatrix);
   gl.uniformMatrix4fv(program_obj.uMMatrix, false, draw_data.modelMatrix);
 
@@ -131,7 +128,7 @@ const shader_color_3d_lighting_shader = {
   , vs: SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER
   , fs: SHADER_COLOR_3D_LIGHTING_FRAGMENT_SHADER
   , attribs: ['aVertexPosition', 'a_Color', 'aVertexNormal']
-  , uniforms: ['u_MVPMatrix', 'uNMatrix', 'uMVMatrix', 'uVMatrix', 'uMMatrix'
+  , uniforms: ['u_MVPMatrix', 'uNMatrix', 'uVMatrix', 'uMMatrix'
     , 'uLightPosition', 'uAmbientLightColor', 'uLightColor']
   , draw: shader_color_3d_lighting_draw
 };
