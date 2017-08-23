@@ -29,13 +29,12 @@ function Scene_Jolene(gfx) {
         , z_rot: 0
     };
 
-  handler_logic = new Handler_Logic_Movement();
 
   matrix_handler = new Handler_Graphics_Matrix(gfx, 40, .1, 100);
   game_object.addHandler(matrix_handler);
   handler_input = new Handler_Input_Camera();
   game_object.addHandler(handler_input);
-  //handler_logic = new Handler_Logic_Camera();
+  handler_logic = new Handler_Logic_Camera();
   game_object.addHandler(handler_logic);
   game_objects.push(game_object);
 
@@ -43,6 +42,7 @@ function Scene_Jolene(gfx) {
   handler_graphics = new Handler_Graphics_3dbox(0, 0
     , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
   game_object.addHandler(handler_graphics);
+  //handler_logic = new Handler_Logic_Movement();
   //game_object.addHandler(handler_logic);
   game_objects.push(game_object);
 
