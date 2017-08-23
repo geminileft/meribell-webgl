@@ -101,7 +101,7 @@ function shader_color_3d_lighting_draw(gl, draw_data) {
   gl.uniformMatrix4fv(program_obj.uVMatrix, false, draw_data.viewMatrix);
   gl.uniformMatrix4fv(program_obj.uMMatrix, false, draw_data.modelMatrix);
 
-  var lightPosition = [20, 5, 5, 1];
+  var lightPosition = [-10, 5, 5, 1];
   gl.uniform4fv(program_obj.uLightPosition, lightPosition);
   gl.uniform3fv(program_obj.uLightColor, [1, 1, .878]);
   //gl.uniform3fv(program_obj.uAmbientLightColor, [.25, .25, .25]);
