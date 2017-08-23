@@ -11,12 +11,12 @@ attribute vec3 aVertexPosition;
 attribute vec4 a_Color;
 attribute vec3 aVertexNormal;
 
-varying vec4 v_Color;
+varying vec4 vColor;
 varying vec4 vTransformedNormal;
 varying vec4 vPosition;
 
 void main() {  
-  v_Color = a_Color;
+  vColor = a_Color;
   gl_Position = u_MVPMatrix * vec4(aVertexPosition, 1.0);
   vTransformedNormal = uNMatrix * vec4(aVertexNormal, 0.0);
   vPosition = uMMatrix * vec4(aVertexPosition, 1.0);
@@ -32,7 +32,7 @@ uniform vec3 uAmbientLightColor;
 
 varying vec4 vTransformedNormal;
 varying vec4 vPosition;
-varying vec4 v_Color;
+varying vec4 vColor;
 
 // The entry point for our fragment shader.
 void main()
@@ -50,7 +50,7 @@ void main()
   vec3 lc = uLightColor;
   //vec3 lighting = uAmbientLightColor + specLight;
   vec3 lighting = uAmbientLightColor + (uLightColor * directional) + specLight;
-  gl_FragColor = vec4(v_Color.rgb * lighting, v_Color.a);    // Pass the color directly through the pipeline.
+  gl_FragColor = vec4(vColor.rgb * lighting, vColor.a);    // Pass the color directly through the pipeline.
 }
 `;
 
