@@ -40,7 +40,7 @@ void main()
   vec4 lightDirection = normalize(uLightPosition - vPosition);
   float directional = clamp(dot(vTransformedNormal, lightDirection), 0.0, 1.0);
 
-  vec3 reflectedVector = reflect(-lightDirection.xyz, vTransformedNormal.xyz);
+  vec3 reflectedVector = reflect(lightDirection.xyz, vTransformedNormal.xyz);
   vec3 eyeVector = normalize(uLightPosition.xyz - vPosition.xyz);
   float s = clamp(dot(reflectedVector, eyeVector), 0.0, 1.0);
   s = pow(s, 50.0);
