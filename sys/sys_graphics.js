@@ -1,5 +1,5 @@
-function Sys_Graphics(gl, renderer_in) {
-	this.gl = gl;
+function Sys_Graphics(renderer_in) {
+	this.gl = renderer_in.getGl();
 	this.textureLookup = null;
   this.handlers = [];
   this.draw_data = [];
