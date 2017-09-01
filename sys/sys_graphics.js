@@ -1,10 +1,11 @@
-function Sys_Graphics(gl) {
+function Sys_Graphics(gl, renderer_in) {
 	this.gl = gl;
 	this.textureLookup = null;
   this.handlers = [];
   this.draw_data = [];
   this.shaders = {};
-  this.viewport = {width:0, height:0};
+  //this.viewport = {width:0, height:0};
+  this.renderer = renderer_in;
 }
 
 Sys_Graphics.prototype.initDisplay = function(width, height) {
@@ -16,7 +17,7 @@ Sys_Graphics.prototype.initDisplay = function(width, height) {
   context.enable(context.STENCIL_TEST);
   //context.enable(context.DEPTH_TEST);
   context.viewport(0, 0, width, height);
-  this.viewport = {width:width, height:height};
+  //this.viewport = {width:width, height:height};
 };
 
 Sys_Graphics.prototype.loadTextures = function(loadedImages) {

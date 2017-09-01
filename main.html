@@ -10,7 +10,7 @@
   <script type="text/javascript" src="./webgl/js_gl_helpers.js"></script>
   <script type="text/javascript" src="./webgl/shader_0.js"></script>
   <script type="text/javascript" src="./webgl/shader_color_3d_lighting.js"></script>
-  <script type="text/javascript" src="./webgl/renderer.js"></script>
+  <script type="text/javascript" src="./webgl/webgl_renderer.js"></script>
 
   <script type="text/javascript" src="./game_core/objects/game_object.js"></script>
   <script type="text/javascript" src="./game_core/objects/game_message.js"></script>
@@ -45,7 +45,8 @@ function main(canvas_id) {
 function postImagesLoad(loadedImages, env) {
   const dimensions = env.getDimensions();
   const glContext = env.createWebGLContext();
-  const gfx = new Sys_Graphics(glContext);
+  const renderer = new WebGl_Renderer();
+  const gfx = new Sys_Graphics(glContext, renderer);
   gfx.initDisplay(dimensions.width, dimensions.height);
   gfx.loadTextures(loadedImages);
   gfx.initShaders();
