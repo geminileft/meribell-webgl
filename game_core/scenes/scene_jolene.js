@@ -1,5 +1,6 @@
 //HARD CODED STUFF FOR DRAWING BOXES
 
+/*
 function Scene_Jolene(gfx) {
   var game_objects = [];
 
@@ -48,8 +49,8 @@ function Scene_Jolene(gfx) {
 
   return game_objects;
 }
+*/
 
-/*
 function Scene_Jolene(gfx) {
   var game_objects = [];
 
@@ -239,4 +240,4 @@ function Scene_Jolene(gfx) {
 
   return game_objects;
 }
-*/
+
