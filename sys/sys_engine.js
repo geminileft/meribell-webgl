@@ -1,33 +1,33 @@
-function Sys_Engine(input, graphics, logic) {
-    this.input = input;
-    this.graphics = graphics;
-    this.logic = logic;
-    this.objects = [];
-    this.run = run_impl.bind(this);
+function Sys_Engine(input_in, graphics_in, logic_in) {
+    this._input = input_in;
+    this._graphics = graphics_in;
+    this._logic = logic_in;
+    this._objects = [];
+    this._run = run_impl.bind(this);
 }
 
 Sys_Engine.prototype.addObject = function(game_object) {
-  this.objects.push(game_object);
+  this._objects.push(game_object);
 }
 
 Sys_Engine.prototype.resetObjects = function() {
-  for (var i = 0;i < this.objects.length;++i) {
-    const game_object = this.objects[i];
+  for (var i = 0;i < this._objects.length;++i) {
+    const game_object = this._objects[i];
     game_object.clearMessages();
   }
 }
 
 Sys_Engine.prototype.start = function(scene_objects) {
-  const input = this.input;
-  var gfx = this.graphics;
-  const logic = this.logic;
+  const input = this._input;
+  var gfx = this._graphics;
+  const logic = this._logic;
 
   for (var i = 0;i < scene_objects.length;++i) {
     this.addObject(scene_objects[i]);
   }
 
-  for (var j = 0;j < this.objects.length;++j) {
-    const object = this.objects[j];
+  for (var j = 0;j < this._objects.length;++j) {
+    const object = this._objects[j];
     for(var i = 0;i < object.handlers.length;++i) {
       const handler = object.handlers[i];
       switch (handler.sys) {
@@ -46,13 +46,13 @@ Sys_Engine.prototype.start = function(scene_objects) {
       }
     }
   }
-  this.run();
+  this._run();
 }
 
 function run_impl() {
-  const input = this.input;
-  var gfx = this.graphics;
-  const logic = this.logic;
+  const input = this._input;
+  var gfx = this._graphics;
+  const logic = this._logic;
 
   input.update();
   logic.update();
@@ -61,5 +61,5 @@ function run_impl() {
   gfx.drawScene();
   this.resetObjects();
 
-  window.setTimeout(this.run, 1000 / 60);
+  window.setTimeout(this._run, 1000 / 60);
 }
