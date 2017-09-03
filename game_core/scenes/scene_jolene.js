@@ -51,7 +51,7 @@ function Scene_Jolene(gfx) {
 }
 */
 
-function Scene_Jolene(gfx) {
+function Scene_Jolene(width, height) {
   var game_objects = [];
 
   var game_object;
@@ -80,7 +80,7 @@ function Scene_Jolene(gfx) {
         , z_rot: 0
     };
 
-  matrix_handler = new Handler_Graphics_Matrix(gfx.getRenderer().getGl(), 40, .1, 100);
+  matrix_handler = new Handler_Graphics_Matrix(width, height, 40, .1, 100);
   game_object.addHandler(matrix_handler);
   handler_input = new Handler_Input_Camera();
   game_object.addHandler(handler_input);

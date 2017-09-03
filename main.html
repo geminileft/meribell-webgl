@@ -51,7 +51,7 @@ function postImagesLoad(loadedImages, env) {
   env.setInputHandler(main_input);
   const logic = new Sys_Logic();
   const engine = new Sys_Engine(main_input, gfx, logic);
-  const scene_objects = Scene_Jolene(gfx);
+  const scene_objects = Scene_Jolene(dimensions.width, dimensions.height);
 
   engine.start(scene_objects);
 }

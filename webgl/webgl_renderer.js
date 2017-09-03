@@ -80,3 +80,7 @@ WebGl_Renderer.prototype.drawScene = function(data) {
     program_obj.draw(context, draw_data);
   }
 }
+
+WebGl_Renderer.prototype.getTexture = function(image_name) {
+	return this.textureLookup[image_name];
+}

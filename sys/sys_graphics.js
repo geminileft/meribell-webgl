@@ -1,16 +1,14 @@
 function Sys_Graphics(renderer_in) {
   this._handlers = [];
-  this.draw_data = [];
+  this._draw_data = [];
   this._renderer = renderer_in;
 }
 
+/*
 Sys_Graphics.prototype.getRenderer = function() {
 	return this._renderer;
 }
-
-Sys_Graphics.prototype.getTexture = function(image_name) {
-	return this.textureLookup[image_name];
-}
+*/
 
 Sys_Graphics.prototype.addHandler = function(handler_in) {
 	this._handlers.push(handler_in);
@@ -24,7 +22,11 @@ Sys_Graphics.prototype.update = function() {
 }
 
 Sys_Graphics.prototype.drawScene = function() {
-  data = this.draw_data;
+  data = this._draw_data;
   this._renderer.drawScene(data);
-  this.draw_data = [];
+  this._draw_data = [];
+}
+
+Sys_Graphics.prototype.add_data = function(data) {
+    this._draw_data.push(data);
 }
