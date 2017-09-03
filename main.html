@@ -43,11 +43,9 @@ function main(canvas_id) {
 }
 
 function postImagesLoad(loadedImages, env) {
-  const renderer = new WebGl_Renderer(env);
+  const renderer = new WebGl_Renderer(env, loadedImages);
   renderer.init();
   const gfx = new Sys_Graphics(renderer);
-  gfx.loadTextures(loadedImages);
-  gfx.initShaders();
   const dimensions = env.getDimensions();
   main_input = new Sys_Input(dimensions.width, dimensions.height, false, true);
   env.setInputHandler(main_input);
