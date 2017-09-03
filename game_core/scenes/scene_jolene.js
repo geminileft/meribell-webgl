@@ -1,7 +1,6 @@
 //HARD CODED STUFF FOR DRAWING BOXES
 
-/*
-function Scene_Jolene(gfx) {
+function Scene_Jolene2(width, height) {
   var game_objects = [];
 
   var game_object;
@@ -31,7 +30,7 @@ function Scene_Jolene(gfx) {
     };
 
 
-  matrix_handler = new Handler_Graphics_Matrix(gfx, 40, .1, 100);
+  matrix_handler = new Handler_Graphics_Matrix(width, height, 40, .1, 100);
   game_object.addHandler(matrix_handler);
   handler_input = new Handler_Input_Camera();
   game_object.addHandler(handler_input);
@@ -44,12 +43,11 @@ function Scene_Jolene(gfx) {
     , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
   game_object.addHandler(handler_graphics);
   handler_logic = new Handler_Logic_Movement();
-  //game_object.addHandler(handler_logic);
+  game_object.addHandler(handler_logic);
   game_objects.push(game_object);
 
   return game_objects;
 }
-*/
 
 function Scene_Jolene(width, height) {
   var game_objects = [];
