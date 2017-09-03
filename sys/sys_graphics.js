@@ -4,12 +4,6 @@ function Sys_Graphics(renderer_in) {
   this._renderer = renderer_in;
 }
 
-/*
-Sys_Graphics.prototype.getRenderer = function() {
-	return this._renderer;
-}
-*/
-
 Sys_Graphics.prototype.addHandler = function(handler_in) {
 	this._handlers.push(handler_in);
 }
