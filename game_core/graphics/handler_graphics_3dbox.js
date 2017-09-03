@@ -50,7 +50,7 @@ Handler_Graphics_3dbox.prototype.update = function(gfx) {
 		, viewMatrix: this.matrixHandler.getViewMatrix()
         , shader: 'shader_color_3d_lighting'
     };
-    gfx.draw_data.push(data);
+	gfx.add_data(data);
 }
 
 function hg3d_data() {

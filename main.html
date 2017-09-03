@@ -7,9 +7,10 @@
   <script type="text/javascript" src="./other/matrix_helpers.js"></script>
   <script type="text/javascript" src="./other/graphics_helpers.js"></script>
 
-  <script type="text/javascript" src="./opengl/js_gl_helpers.js"></script>
-  <script type="text/javascript" src="./opengl/shader_0.js"></script>
-  <script type="text/javascript" src="./opengl/shader_color_3d_lighting.js"></script>
+  <script type="text/javascript" src="./webgl/js_gl_helpers.js"></script>
+  <script type="text/javascript" src="./webgl/shader_0.js"></script>
+  <script type="text/javascript" src="./webgl/shader_color_3d_lighting.js"></script>
+  <script type="text/javascript" src="./webgl/webgl_renderer.js"></script>
 
   <script type="text/javascript" src="./game_core/objects/game_object.js"></script>
   <script type="text/javascript" src="./game_core/objects/game_message.js"></script>
@@ -42,17 +43,15 @@ function main(canvas_id) {
 }
 
 function postImagesLoad(loadedImages, env) {
+  const renderer = new WebGl_Renderer(env, loadedImages);
+  renderer.init();
+  const gfx = new Sys_Graphics(renderer);
   const dimensions = env.getDimensions();
-  const glContext = env.createWebGLContext();
-  const gfx = new Sys_Graphics(glContext);
-  gfx.initDisplay(dimensions.width, dimensions.height);
-  gfx.loadTextures(loadedImages);
-  gfx.initShaders();
   main_input = new Sys_Input(dimensions.width, dimensions.height, false, true);
   env.setInputHandler(main_input);
   const logic = new Sys_Logic();
   const engine = new Sys_Engine(main_input, gfx, logic);
-  const scene_objects = Scene_Jolene(gfx);
+  const scene_objects = Scene_Jolene(dimensions.width, dimensions.height);
 
   engine.start(scene_objects);
 }
