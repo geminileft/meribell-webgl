@@ -1,8 +1,11 @@
 function Sys_Graphics(renderer_in) {
-	this.gl = renderer_in.getGl();
   this.handlers = [];
   this.draw_data = [];
   this.renderer = renderer_in;
+}
+
+Sys_Graphics.prototype.getRenderer = function() {
+	return this.renderer;
 }
 
 Sys_Graphics.prototype.getTexture = function(image_name) {
