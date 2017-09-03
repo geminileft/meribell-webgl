@@ -33,8 +33,6 @@
   <script type="text/javascript" src="./sys/sys_engine.js"></script>
 
 <script type="text/javascript">
-var main_input = null;
-
 function main(canvas_id) {
   const images = [
   ];
@@ -47,10 +45,10 @@ function postImagesLoad(loadedImages, env) {
   renderer.init();
   const gfx = new Sys_Graphics(renderer);
   const dimensions = env.getDimensions();
-  main_input = new Sys_Input(dimensions.width, dimensions.height, false, true);
-  env.setInputHandler(main_input);
+  const input = new Sys_Input(dimensions.width, dimensions.height, false, true);
+  env.setInputHandler(input);
   const logic = new Sys_Logic();
-  const engine = new Sys_Engine(main_input, gfx, logic);
+  const engine = new Sys_Engine(input, gfx, logic);
   const scene_objects = Scene_Jolene2(dimensions.width, dimensions.height);
 
   engine.start(scene_objects);
