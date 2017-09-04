@@ -59,10 +59,6 @@ Sys_Env.prototype.postImagesLoad = function() {
 	this._postLoadCallback(this._loadedImages, this);
 }
 
-Sys_Env.prototype.setInputHandler = function(handler) {
-	this._env_input.setInputHandler(handler);
-}
-
 Sys_Env.prototype.get_input = function() {
 	return this._env_input;
 }
