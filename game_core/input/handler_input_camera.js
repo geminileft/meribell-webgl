@@ -14,11 +14,13 @@ Handler_Input_Camera.prototype.update = function(actions) {
         this.game_object.addMessage(msg);
     }
 
+/*
     for (var i = 0;i < new_actions.ui.length;++i) {
         const ui_action = new_actions.ui[i];
         const msg = new Game_Message('ui', ui_action);
         this.game_object.addMessage(msg);
     }
+*/
 
     return null;
 }

@@ -1,14 +1,16 @@
 function Sys_Env(canvas_id) {
 	const canvas = document.getElementById(canvas_id);
+	const env_input = new Sys_Env_Input(canvas.width, canvas.height);
 	canvas.addEventListener("click", this.getClickPosition.bind(this), false);
-	canvas.addEventListener("keydown", this.getKeyDown.bind(this), false);
-	canvas.addEventListener("keyup", this.getKeyUp.bind(this), false);
+	canvas.addEventListener("keydown", env_input.getKeyDown.bind(env_input), false);
+	canvas.addEventListener("keyup", env_input.getKeyUp.bind(env_input), false);
+
 	this._canvas = canvas;
 
 	this._imagesLeftToLoad = 0;
 	this._loadedImages = null;
 	this._postLoadCallback = null;
-	this._inputHandler = null;
+	this._env_input = env_input;
 }
 
 Sys_Env.prototype.getDimensions = function() {
@@ -58,7 +60,7 @@ Sys_Env.prototype.postImagesLoad = function() {
 }
 
 Sys_Env.prototype.setInputHandler = function(handler) {
-	this._inputHandler = handler;
+	this._env_input.setInputHandler(handler);
 }
 
 Sys_Env.prototype.getClickPosition = function(e) {
@@ -66,14 +68,6 @@ Sys_Env.prototype.getClickPosition = function(e) {
   var xPosition = e.clientX - parentPosition.x;
   var yPosition = e.clientY - parentPosition.y;
   this._inputHandler.receiveClickAt(xPosition, yPosition);
-}
-
-Sys_Env.prototype.getKeyDown = function(e) {
-	this._inputHandler.receiveKeyDown(e.key);
-}
-
-Sys_Env.prototype.getKeyUp = function(e) {
-	this._inputHandler.receiveKeyUp(e.key);
 }
 
 function getPosition(el) {
