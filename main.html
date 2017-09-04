@@ -46,12 +46,10 @@ function postImagesLoad(loadedImages, env) {
   renderer.init();
   const gfx = new Sys_Graphics(renderer);
   const dimensions = env.getDimensions();
-  const input = new Sys_Input(dimensions.width, dimensions.height, false, true);
-  env.setInputHandler(input);
+  const input = new Sys_Input(env.get_input());
   const logic = new Sys_Logic();
   const engine = new Sys_Engine(input, gfx, logic);
   const scene_objects = Scene_Jolene2(dimensions.width, dimensions.height);
-
   engine.start(scene_objects);
 }
 </script>

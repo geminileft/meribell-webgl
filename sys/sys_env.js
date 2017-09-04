@@ -1,12 +1,12 @@
 function Sys_Env(canvas_id) {
 	const canvas = document.getElementById(canvas_id);
 	const env_input = new Sys_Env_Input(canvas.width, canvas.height);
-	canvas.addEventListener("click", this.getClickPosition.bind(this), false);
+	canvas.addEventListener("mousedown", env_input.get_mouse_down.bind(env_input), false);
+	canvas.addEventListener("mouseup", env_input.get_mouse_up.bind(env_input), false);
 	canvas.addEventListener("keydown", env_input.getKeyDown.bind(env_input), false);
 	canvas.addEventListener("keyup", env_input.getKeyUp.bind(env_input), false);
 
 	this._canvas = canvas;
-
 	this._imagesLeftToLoad = 0;
 	this._loadedImages = null;
 	this._postLoadCallback = null;
@@ -63,35 +63,6 @@ Sys_Env.prototype.setInputHandler = function(handler) {
 	this._env_input.setInputHandler(handler);
 }
 
-Sys_Env.prototype.getClickPosition = function(e) {
-  var parentPosition = getPosition(e.currentTarget);
-  var xPosition = e.clientX - parentPosition.x;
-  var yPosition = e.clientY - parentPosition.y;
-  this._inputHandler.receiveClickAt(xPosition, yPosition);
-}
-
-function getPosition(el) {
-  var xPos = 0;
-  var yPos = 0;
-
-  while (el) {
-    if (el.tagName == "BODY") {
-      // deal with browser quirks with body/window/document and page scroll
-      var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
-      var yScroll = el.scrollTop || document.documentElement.scrollTop;
-
-      xPos += (el.offsetLeft - xScroll + el.clientLeft);
-      yPos += (el.offsetTop - yScroll + el.clientTop);
-    } else {
-      // for all other non-BODY elements
-      xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
-      yPos += (el.offsetTop - el.scrollTop + el.clientTop);
-    }
-
-    el = el.offsetParent;
-  }
-  return {
-    x: xPos,
-    y: yPos
-  };
+Sys_Env.prototype.get_input = function() {
+	return this._env_input;
 }
