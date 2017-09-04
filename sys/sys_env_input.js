@@ -1,7 +1,6 @@
 function Sys_Env_Input(width_in, height_in) {
 	this._width = width_in;
 	this._height = height_in;
-	this._inputHandler = null;
 	this._input_buffer = [];
 }
 
@@ -11,18 +10,12 @@ Sys_Env_Input.prototype.get_input = function() {
 	return return_val;
 }
 
-Sys_Env_Input.prototype.setInputHandler = function(handler) {
-	this._inputHandler = handler;
-}
-
 Sys_Env_Input.prototype.getKeyDown = function(e) {
 	this._input_buffer.push({type:'key_down', data: {key: e.key}});
-	//this._inputHandler.receiveKeyDown(e.key);
 }
 
 Sys_Env_Input.prototype.getKeyUp = function(e) {
 	this._input_buffer.push({type:'key_up', data: {key: e.key}});
-	//this._inputHandler.receiveKeyUp(e.key);
 }
 
 Sys_Env_Input.prototype.get_mouse_down = function(e) {
@@ -32,7 +25,6 @@ Sys_Env_Input.prototype.get_mouse_down = function(e) {
 	const x_norm = xPosition / this._width;
 	const y_norm = (this._height - yPosition) / this._height;
 	this._input_buffer.push({type:'mouse_down', data: {x: x_norm, y: y_norm}});
-	//this._inputHandler.receiveClickAt(x_norm, y_norm);
 }
 
 Sys_Env_Input.prototype.get_mouse_up = function(e) {
@@ -42,7 +34,6 @@ Sys_Env_Input.prototype.get_mouse_up = function(e) {
 	const x_norm = xPosition / this._width;
 	const y_norm = (this._height - yPosition) / this._height;
 	this._input_buffer.push({type:'mouse_up', data: {x: x_norm, y: y_norm}});
-	//this._inputHandler.receiveClickAt(x_norm, y_norm);
 }
 
 function getPosition(el) {
