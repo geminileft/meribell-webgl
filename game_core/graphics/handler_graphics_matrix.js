@@ -9,10 +9,12 @@ Handler_Graphics_Matrix.prototype.getProjectionMatrix = function() {
 }
 
 Handler_Graphics_Matrix.prototype.getViewMatrix = function() {
+    const game_object = this.game_object;
+
     const camera_location = {
-        x_pos : this.game_object.x
-        , y_pos : this.game_object.y
-        , z_pos : this.game_object.z
+        x_pos : game_object.x
+        , y_pos : game_object.y
+        , z_pos : game_object.z
     };
     //TODO: REFACTOR OUT FROM MAT4_LOOKAT THE OTHER VALUES
     return mat4_lookat(camera_location);

@@ -19,9 +19,11 @@ function Handler_Graphics_3dbox(rotate_x, rotate_y,
 }
 
 Handler_Graphics_3dbox.prototype.update = function(gfx) {
-    const x = this.game_object.x;
-    const y = this.game_object.y;
-    const z = this.game_object.z;
+	const game_object = this.game_object;
+
+    const x = game_object.x;
+    const y = game_object.y;
+    const z = game_object.z;
 
 	var identity = mat4.create();
 

@@ -1,6 +1,5 @@
 function Handler_Input_Camera() {
     this.actions = {dir:[], ui:[]};
-    this.game_object = null;
     this.sys = 'input';
 }
 
@@ -11,17 +10,11 @@ Handler_Input_Camera.prototype.update = function(actions) {
     const action_in = new_actions.dir[0];
 
     if (action_in != null) {
-        const msg = new Game_Message('move', action_in);
-        this.game_object.addMessage(msg);
-    }
+        const game_object = this.game_object;
 
-/*
-    for (var i = 0;i < new_actions.ui.length;++i) {
-        const ui_action = new_actions.ui[i];
-        const msg = new Game_Message('ui', ui_action);
-        this.game_object.addMessage(msg);
+        const msg = new Game_Message('move', action_in);
+        game_object.addMessage(msg);
     }
-*/
 
     return null;
 }
