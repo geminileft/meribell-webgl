@@ -4,6 +4,7 @@ function Sys_Engine(input_in, graphics_in, logic_in) {
     this._logic = logic_in;
     this._objects = [];
     this._run = run_impl.bind(this);
+    this._scene = null;
 }
 
 Sys_Engine.prototype.addObject = function(game_object) {
@@ -17,15 +18,21 @@ Sys_Engine.prototype.resetObjects = function() {
   }
 }
 
-Sys_Engine.prototype.start = function(scene_objects) {
+Sys_Engine.prototype.start = function(scene) {
+
+  this._scene = scene;
   const input = this._input;
   var gfx = this._graphics;
   const logic = this._logic;
 
+
+  /*
   for (var i = 0;i < scene_objects.length;++i) {
     this.addObject(scene_objects[i]);
   }
+  */
 
+  /*
   for (var j = 0;j < this._objects.length;++j) {
     const object = this._objects[j];
     for(var i = 0;i < object.handlers.length;++i) {
@@ -46,6 +53,16 @@ Sys_Engine.prototype.start = function(scene_objects) {
       }
     }
   }
+  */
+
+  const map = {
+    graphics : gfx
+    , input : input
+    , logic : logic
+  };
+
+  scene.start(map);
+
   this._run();
 }
 
@@ -59,7 +76,8 @@ function run_impl() {
   gfx.update();
 
   gfx.drawScene();
-  this.resetObjects();
+  //this.resetObjects();
+  this._scene.reset_objects();
 
   window.setTimeout(this._run, 1000 / 60);
 }

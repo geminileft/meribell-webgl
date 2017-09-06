@@ -24,5 +24,4 @@ Scene.prototype.start = function(system_map) {
             sys.addHandler(handler);
         }
     }
-    this._run();
 }
