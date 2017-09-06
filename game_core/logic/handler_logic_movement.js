@@ -5,8 +5,10 @@ function Handler_Logic_Movement() {
 }
 
 Handler_Logic_Movement.prototype.update = function() {
+    const game_object = this.game_object;
+
     this.delta += this.pos_delta;
-    this.game_object.x += this.pos_delta;
+    game_object.x += this.pos_delta;
 
     if (this.delta > 10 || this.delta < -10) {
         this.pos_delta *= -1;
