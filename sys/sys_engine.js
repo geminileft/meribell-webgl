@@ -5,9 +5,17 @@ function Sys_Engine(input_in, graphics_in, logic_in) {
     this._objects = [];
     this._run = run_impl.bind(this);
     this._scene = null;
+    this._scenes = {};
 }
 
-Sys_Engine.prototype.start = function(scene) {
+Sys_Engine.prototype.add_scene = function(name, scene) {
+  this._scenes[name] = scene;
+}
+  
+Sys_Engine.prototype.start = function(name) {
+
+  //TODO: TEST BAD NAME!!
+  const scene = this._scenes[name];
 
   this._scene = scene;
   const input = this._input;
