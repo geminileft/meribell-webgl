@@ -1,5 +1,6 @@
 function Handler_Input_Camera() {
     this.actions = {dir:[], ui:[]};
+    this.game_object = null;
     this.sys = 'input';
 }
 
