@@ -280,14 +280,13 @@ function Scene_Jolene(width, height) {
   game_object.addHandler(handler_graphics);
   game_objects.push(game_object);
 
-
-
   game_object = new Game_Object(0, 14, -6);
   handler_graphics = new Handler_Graphics_3dbox(0, 0
     , [[1.0, 1.0, 0.0, 1.0]], matrix_handler);
   game_object.addHandler(handler_graphics);
   game_objects.push(game_object);
 
-  return game_objects;
+  const scene = new Scene(game_objects);
+  return scene;
 }
 
