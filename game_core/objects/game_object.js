@@ -1,4 +1,4 @@
-//TODO: NEEDS CLEANUP
+//TODO: ALL HANDLERS NEEDS CLEANUP
 
 function Game_Object(x, y, z) {
     this.x = x;
