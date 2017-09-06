@@ -43,7 +43,11 @@ function run_impl() {
   gfx.update();
 
   gfx.drawScene();
+
   this._scene.reset_objects();
+
+  //TODO:THIS IS WHERE WE TRANSITION?
+
 
   window.setTimeout(this._run, 1000 / 60);
 }
