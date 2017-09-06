@@ -1,3 +1,5 @@
+//TODO: NEEDS CLEANUP
+
 function Game_Object(x, y, z) {
     this.x = x;
     this.y = y;

@@ -32,7 +32,14 @@ Handler_Input_Camera.prototype.processActions = function(current_actions, action
     const keyActionFunc = function(key_val) {
         var action = null;
         switch (key_val) {
-            case 'd': action = ACTION_RIGHT;
+            case '1': 
+                Rrr = 5;
+            break;
+            case '2': 
+                Rrr = 3;
+            break;
+            case 'd':
+                action = ACTION_RIGHT;
             break;
             case 'a': action = ACTION_LEFT;
             break;
