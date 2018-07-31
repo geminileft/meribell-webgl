@@ -25,6 +25,7 @@
   <script type="text/javascript" src="./game_core/logic/handler_logic_movement.js"></script>
 
   <script type="text/javascript" src="./game_core/scenes/scene_jolene.js"></script>
+  <script type="text/javascript" src="./game_core/scenes/scene_car_driving.js"></script>
 
   <script type="text/javascript" src="./sys/sys_env.js"></script>
   <script type="text/javascript" src="./sys/sys_input_shared.js"></script>
@@ -52,13 +53,16 @@ function postImagesLoad(loadedImages, env) {
   const logic = new Sys_Logic();
   const engine = new Sys_Engine(input, gfx, logic);
 
-  const scene_jolene = Scene_Jolene(dimensions.width, dimensions.height);
-  engine.add_scene('scene_jolene', scene_jolene);
+  // const scene_jolene = Scene_Jolene(dimensions.width, dimensions.height);
+  // engine.add_scene('scene_jolene', scene_jolene);
 
-  const scene_jolene3 = Scene_Jolene3(dimensions.width, dimensions.height);
-  engine.add_scene('scene_jolene3', scene_jolene3);
+  // const scene_jolene3 = Scene_Jolene3(dimensions.width, dimensions.height);
+  // engine.add_scene('scene_jolene3', scene_jolene3);
 
-  engine.start('scene_jolene3');
+  const scene = Scene_Car_Driving(dimensions.width, dimensions.height);
+  engine.add_scene('scene', scene);
+
+  engine.start('scene');
 }
 </script>
 </head>
