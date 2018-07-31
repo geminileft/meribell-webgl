@@ -1,10 +1,14 @@
-function Handler_Logic_Camera() {
+function Handler_Logic_Camera(pos_delta, rot_delta) {
     this.sys = 'logic';
+    this.pos_delta = pos_delta;
+    this.rot_delta = rot_delta;
 }
 
 Handler_Logic_Camera.prototype.update = function() {
-    const pos_delta = 0.25;
-    const rot_delta = .005;
+    // const pos_delta = 0.25;
+    // const rot_delta = .005;
+    const pos_delta = this.pos_delta;
+    const rot_delta = this.rot_delta;
 
     const game_object = this.game_object;
 
