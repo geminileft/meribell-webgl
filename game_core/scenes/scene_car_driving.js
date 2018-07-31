@@ -11,7 +11,7 @@ function Scene_Car_Driving(width, height) {
     // game_object = new Game_Object(0, 0, 0);
     game_object = new Game_Object(-2, 3, 11.5);
   
-    matrix_handler = new Handler_Graphics_Matrix(width, height, 40, .1, 100);
+    matrix_handler = new Handler_Graphics_Matrix(width, height, 40, .1, 1000);
     game_object.addHandler(matrix_handler);
     handler_input = new Handler_Input_Camera();
     game_object.addHandler(handler_input);
@@ -24,7 +24,7 @@ function Scene_Car_Driving(width, height) {
     game_object.addHandler(handler_graphics);
     game_objects.push(game_object);
   
-    game_object = new Game_Object(0, 0, -8);
+    game_object = new Game_Object(0, 0, -128);
     handler_graphics = new Handler_Graphics_Thickline([[0.933, 0.510, 0.933, 1.0]], matrix_handler);
     game_object.addHandler(handler_graphics);
     game_objects.push(game_object);
