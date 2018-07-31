@@ -9,7 +9,7 @@ function Scene_Car_Driving(width, height) {
     var handler_input;
   
     // game_object = new Game_Object(0, 0, 0);
-    game_object = new Game_Object(3, 3, 5);
+    game_object = new Game_Object(0, 10, 20);
   
     matrix_handler = new Handler_Graphics_Matrix(width, height, 40, .1, 100);
     game_object.addHandler(matrix_handler);
