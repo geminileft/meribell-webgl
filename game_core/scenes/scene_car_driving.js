@@ -8,25 +8,7 @@ function Scene_Car_Driving(width, height) {
     var handler_logic;
     var handler_input;
   
-    const color_range = [
-        [0.0, 0.0, 1.0, 1.0]
-        , [0.0, 1.0, 0.0, 1.0]
-        , [1.0, 0.0, 0.0, 1.0]
-        , [1.0, 0.75, 0.75, 1.0]
-        , [1.0, 0.0, 1.0, 1.0]
-        , [0.0, 1.0, 1.0, 1.0]
-    ];
-  
     game_object = new Game_Object(10, 12, 20);
-  
-    const camera_location = {
-          x_pos: 10
-          , x_rot: 0
-          , y_pos: 12
-          , y_rot: 0
-          , z_pos: 20
-          , z_rot: 0
-      };
   
     matrix_handler = new Handler_Graphics_Matrix(width, height, 40, .1, 100);
     game_object.addHandler(matrix_handler);
@@ -37,153 +19,21 @@ function Scene_Car_Driving(width, height) {
     game_objects.push(game_object);
   
     game_object = new Game_Object(0, 0, 0);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0
-      , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
+    handler_graphics = new Handler_Graphics_Thickline([[0.690, 0.878, 0.902, 1.0]], matrix_handler);
     game_object.addHandler(handler_graphics);
     game_objects.push(game_object);
   
-    game_object = new Game_Object(-2, 0, 0);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0, color_range
-      , matrix_handler);
+    game_object = new Game_Object(0, 0, -8);
+    handler_graphics = new Handler_Graphics_Thickline([[0.933, 0.510, 0.933, 1.0]], matrix_handler);
     game_object.addHandler(handler_graphics);
     game_objects.push(game_object);
-  
-    game_object = new Game_Object(-4, 0, 0);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0
-      , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-    game_object = new Game_Object(-6, 0, 0);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0, color_range
-      , matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-    game_object = new Game_Object(-2, 2, -2);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0, [[1.0, 1.0, 1.0, 1.0]]
-      , matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-    game_object = new Game_Object(-4, 2, -2);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0
-      , color_range, matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-    game_object = new Game_Object(-6, 2, -2);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0, [[1.0, 1.0, 1.0, 1.0]]
-      , matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-  
-  
-    game_object = new Game_Object(0, 4, -2);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0
-      , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-    game_object = new Game_Object(-2, 4, -2);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0, color_range
-      , matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-    game_object = new Game_Object(-4, 4, -2);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0
-      , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-    game_object = new Game_Object(-6, 4, -2);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0, color_range
-      , matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-  
-  
-    game_object = new Game_Object(0, 6, -4);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0, color_range
-      , matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-    game_object = new Game_Object(-2, 6, -4);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0
-      , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-  
-  
-    game_object = new Game_Object(0, 8, -4);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0
-      , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-    game_object = new Game_Object(-2, 8, -4);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0, color_range
-      , matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-    game_object = new Game_Object(-4, 8, -4);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0
-      , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-  
-  
-    game_object = new Game_Object(0, 10, -6);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0
-      , color_range, matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-    game_object = new Game_Object(-2, 10, -6);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0, [[1.0, 1.0, 1.0, 1.0]]
-      , matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-    game_object = new Game_Object(-6, 10, -4);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0, color_range
-      , matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-  
-  
-    game_object = new Game_Object(0, 12, -6);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0
-      , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-    game_object = new Game_Object(-2, 12, -6);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0, color_range
-      , matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-    game_object = new Game_Object(-6, 12, -4);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0, [[1.0, 1.0, 1.0, 1.0]]
-      , matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
-    game_object = new Game_Object(0, 14, -6);
-    handler_graphics = new Handler_Graphics_3dbox(0, 0
-      , [[1.0, 1.0, 0.0, 1.0]], matrix_handler);
-    game_object.addHandler(handler_graphics);
-    game_objects.push(game_object);
-  
+
+    // game_object = new Game_Object(0, 0, 0);
+    // handler_graphics = new Handler_Graphics_3dbox(0, 0
+    //   , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
+    // game_object.addHandler(handler_graphics);
+    // game_objects.push(game_object);
+    
     const scene = new Scene(game_objects);
     return scene;
   }
