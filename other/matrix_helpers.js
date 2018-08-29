@@ -57,9 +57,9 @@ function mat4_lookat(camera_location) {
         , camera_location.z_pos]);
     //TODO: FIX HARDCODING BELOW
     var camera_target = vec3.create([
-        camera_location.x_pos
-        , camera_location.y_pos
-        , camera_location.z_pos - 10]);
+        camera_location.x_pos - 10
+        , camera_location.y_pos - 10
+        , camera_location.z_pos - 20]);
 
     var vec_diff = vec3.create();
     var camera_direction = vec3.create();
