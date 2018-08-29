@@ -53,16 +53,14 @@ Handler_Graphics_Thickline.prototype.update = function(gfx) {
 }
 
 Handler_Graphics_Thickline.prototype.getData = function() {
-	const half_width = 0.4;
-	const half_height = 50.0;
 	return {
 vertices : [
-	half_width, -1.000000, -half_height
-	, half_width, -1.000000, half_height
-	, -half_width, -1.000000, half_height
-	, half_width, -1.000000, -half_height
-	, -half_width, -1.000000, half_height
-	, -half_width, -1.000000, -half_height
+	0.200000, -1.000000, -1.000000
+	, 0.200000, -1.000000, 1.000000
+	, -0.200000, -1.000000, 1.000000
+	, 0.200000, -1.000000, -1.000000
+	, -0.200000, -1.000000, 1.000000
+	, -0.200000, -1.000000, -1.000000
 ]
 
 , normals : [

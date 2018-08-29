@@ -57,13 +57,13 @@ function postImagesLoad(loadedImages, env) {
   // const scene_jolene = Scene_Jolene(dimensions.width, dimensions.height);
   // engine.add_scene('scene_jolene', scene_jolene);
 
-  // const scene_jolene3 = Scene_Jolene3(dimensions.width, dimensions.height);
-  // engine.add_scene('scene_jolene3', scene_jolene3);
+  const scene_jolene3 = Scene_Jolene3(dimensions.width, dimensions.height);
+  engine.add_scene('scene_jolene3', scene_jolene3);
 
-  const scene = Scene_Car_Driving(dimensions.width, dimensions.height);
-  engine.add_scene('scene', scene);
+  // const scene = Scene_Car_Driving(dimensions.width, dimensions.height);
+  // engine.add_scene('scene', scene);
 
-  engine.start('scene');
+  engine.start('scene_jolene3');
 }
 </script>
 </head>

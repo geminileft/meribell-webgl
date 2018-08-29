@@ -2,7 +2,6 @@ function Handler_Logic_Camera(pos_delta, rot_delta) {
     this.sys = 'logic';
     this.pos_delta = pos_delta;
     this.rot_delta = rot_delta;
-    this.camera_location = {x_rot:0, y_rot:0};
 }
 
 Handler_Logic_Camera.prototype.update = function() {
