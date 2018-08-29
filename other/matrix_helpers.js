@@ -92,3 +92,21 @@ function mat4_lookat(camera_location) {
 
     return mat4_multiply(m1, m2);
 }
+
+function mat4_multiply2(m1, m2) {
+    var newMatrix = mat4.create();
+    mat4.multiply(m1, m2, newMatrix);
+    return newMatrix;
+}
+
+function mat4_inverse(m) {
+    var newMatrix = mat4.create();
+    mat4.inverse(m, newMatrix);
+    return newMatrix;
+}
+
+function mat4_transpose(m) {
+    var newMatrix = mat4.create();
+    mat4.transpose(m, newMatrix);
+    return newMatrix;
+}
