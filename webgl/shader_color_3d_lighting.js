@@ -49,8 +49,8 @@ void main()
 
   vec3 lc = uLightColor;
   //vec3 lighting = uAmbientLightColor + specLight;
-  //vec3 lighting = uAmbientLightColor + (uLightColor * directional);
-  vec3 lighting = uAmbientLightColor + (uLightColor * directional) + specLight;
+  vec3 lighting = uAmbientLightColor + (uLightColor * directional);
+  //vec3 lighting = uAmbientLightColor + (uLightColor * directional) + specLight;
   gl_FragColor = vec4(vColor.rgb * lighting, vColor.a);    // Pass the color directly through the pipeline.
 }
 `;
@@ -95,10 +95,11 @@ function shader_color_3d_lighting_draw(gl, draw_data) {
   gl.uniformMatrix4fv(program_obj.uNMatrix, false, normalMatrix);
   gl.uniformMatrix4fv(program_obj.uMMatrix, false, draw_data.modelMatrix);
 
-  var lightPosition = [-10, 5, 5, 1];
+  var lightPosition = [0, 0, 0, 1];
   gl.uniform4fv(program_obj.uLightPosition, lightPosition);
-  gl.uniform3fv(program_obj.uLightColor, [1, 1, .878]);
-  gl.uniform3fv(program_obj.uAmbientLightColor, [.7, .7, .7]);
+  gl.uniform3fv(program_obj.uLightColor, [1, 1, 1]);
+  // gl.uniform3fv(program_obj.uAmbientLightColor, [.7, .7, .7]);
+  gl.uniform3fv(program_obj.uAmbientLightColor, [0, 0, 0]);
 
   const draw_ct = interleaved.length / INTERLEAVED_SIZE;
   gl.drawArrays(gl.TRIANGLES, 0, draw_ct);
