@@ -51,7 +51,7 @@ void main()
 
   vec3 lc = uLightColor;
   //vec3 lighting = uAmbientLightColor + specLight;
-  float attenuation = 1.0 / (1.0 + 0.2 * pow(distanceToLight, 2.0));
+  float attenuation = 1.0 / (1.0 + 0.025 * pow(distanceToLight, 2.0));
   vec3 lighting = uAmbientLightColor + (attenuation * (uLightColor * directional));
   // vec3 lighting = uAmbientLightColor + (uLightColor * directional) + specLight;
   gl_FragColor = vec4(vColor.rgb * lighting, vColor.a);    // Pass the color directly through the pipeline.
