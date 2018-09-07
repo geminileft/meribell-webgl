@@ -10,7 +10,7 @@ function Scene_Jolene3(width, height) {
   var handler_logic;
   var handler_input;
 
-  game_object = new Game_Object(0, 16, 42.5);
+  game_object = new Game_Object(0, 16, 50);
 
   matrix_handler = new Handler_Graphics_Matrix(width, height, 40, .1, 1000);
   game_object.addHandler(matrix_handler);
