@@ -1,17 +1,35 @@
 function Handler_Graphics_Singlestreet(color_range, matrixHandler, width, height
-	, lanes, rows, spacing, top_spacing
+	, lanes, rows, spacing, top_spacing, camera_obj
 ) {
 	this.projectionMatrix = matrixHandler.getProjectionMatrix();
 	this.matrixHandler = matrixHandler;
 	this.sys = 'graphics';
 	this.width = width;
 	this.height = height;
+	this.color_range = color_range;
+	this.lanes = lanes;
+	this.rows = rows;
+	this.spacing = spacing;
+	this.top_spacing = top_spacing;
+	this.camera_obj = camera_obj;
+}
 
-	const vdata = this.getData(color_range
-		, lanes
-		, rows
-		, spacing
-		, top_spacing
+Handler_Graphics_Singlestreet.prototype.update = function(gfx) {
+	const game_object = this.game_object;
+
+    // const x = game_object.x;
+    // const y = game_object.y;
+    const z = this.camera_obj.z;
+
+	const size_interval = (this.top_spacing * this.height);
+	const start_z = Math.floor(z / size_interval) * size_interval;
+
+	const vdata = this.getData(this.color_range
+		, this.lanes
+		, this.rows
+		, this.spacing
+		, this.top_spacing
+		, start_z
 	);
 
     const interleaved = create_interleaved3(
@@ -20,20 +38,10 @@ function Handler_Graphics_Singlestreet(color_range, matrixHandler, width, height
         , vdata.normals, GL_NORMAL_SIZE
         , vdata.count);
 
-	this.interleaved = interleaved;
-}
-
-Handler_Graphics_Singlestreet.prototype.update = function(gfx) {
-	const game_object = this.game_object;
-
-    const x = game_object.x;
-    const y = game_object.y;
-    const z = game_object.z;
-
 	var identity = mat4_identity();
 
     const data = {
-        interleaved:this.interleaved
+        interleaved:interleaved
 		, modelMatrix: identity
 		, projectionMatrix: this.projectionMatrix
 		, viewMatrix: this.matrixHandler.getViewMatrix()
@@ -48,6 +56,7 @@ Handler_Graphics_Singlestreet.prototype.getData = function(
 	, rows
 	, spacing
 	, top_spacing
+	, start_z
 ) {
 	const SINGLE_VERTEX_COUNT = 6;
 
@@ -72,12 +81,12 @@ Handler_Graphics_Singlestreet.prototype.getData = function(
 		right_position = (lanes * spacing) / 2.0;
 		for(var i = 0;i < lanes + 1;++i) {
 			const STANDARD_VERTEX = [
-				-right_position + half_width, 0.0, -top_position -half_height
-				, -right_position + half_width, 0.0, -top_position + half_height
-				, -right_position -half_width, 0.0, -top_position + half_height
-				, -right_position + half_width, 0.0, -top_position - half_height
-				, -right_position -half_width, 0.0, -top_position + half_height
-				, -right_position -half_width, 0.0, -top_position - half_height		
+				-right_position + half_width, 0.0, -top_position -half_height + start_z
+				, -right_position + half_width, 0.0, -top_position + half_height + start_z
+				, -right_position -half_width, 0.0, -top_position + half_height + start_z
+				, -right_position + half_width, 0.0, -top_position - half_height + start_z
+				, -right_position -half_width, 0.0, -top_position + half_height + start_z
+				, -right_position -half_width, 0.0, -top_position - half_height + start_z	
 			];
 			my_vertices.push.apply(my_vertices, STANDARD_VERTEX);
 			right_position -= spacing;
