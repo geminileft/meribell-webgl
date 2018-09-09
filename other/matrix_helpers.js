@@ -57,8 +57,8 @@ function mat4_lookat(camera_location) {
         , camera_location.z_pos]);
     //TODO: FIX HARDCODING BELOW
     var camera_target = vec3.create([
-        camera_location.x_pos - 10
-        , camera_location.y_pos - 10
+        camera_location.x_pos
+        , camera_location.y_pos
         , camera_location.z_pos - 20]);
 
     var vec_diff = vec3.create();
@@ -91,4 +91,22 @@ function mat4_lookat(camera_location) {
     ];
 
     return mat4_multiply(m1, m2);
+}
+
+function mat4_multiply2(m1, m2) {
+    var newMatrix = mat4.create();
+    mat4.multiply(m1, m2, newMatrix);
+    return newMatrix;
+}
+
+function mat4_inverse(m) {
+    var newMatrix = mat4.create();
+    mat4.inverse(m, newMatrix);
+    return newMatrix;
+}
+
+function mat4_transpose(m) {
+    var newMatrix = mat4.create();
+    mat4.transpose(m, newMatrix);
+    return newMatrix;
 }

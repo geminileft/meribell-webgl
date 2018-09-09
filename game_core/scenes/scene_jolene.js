@@ -10,9 +10,9 @@ function Scene_Jolene3(width, height) {
   var handler_logic;
   var handler_input;
 
-  game_object = new Game_Object(8.25, 16, 42.5);
+  game_object = new Game_Object(0, 16, 50);
 
-  matrix_handler = new Handler_Graphics_Matrix(width, height, 40, .1, 100);
+  matrix_handler = new Handler_Graphics_Matrix(width, height, 40, .1, 1000);
   game_object.addHandler(matrix_handler);
   handler_input = new Handler_Input_Camera();
   game_object.addHandler(handler_input);
@@ -20,7 +20,7 @@ function Scene_Jolene3(width, height) {
   game_object.addHandler(handler_logic);
   game_objects.push(game_object);
 
-  game_object = new Game_Object(-10, -1, -4);
+  game_object = new Game_Object(0, 0, 0);
   handler_graphics = new Handler_Graphics_3dbox(0, 0
     , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
   game_object.addHandler(handler_graphics);
@@ -28,7 +28,7 @@ function Scene_Jolene3(width, height) {
   game_object.addHandler(handler_logic);
   game_objects.push(game_object);
 
-  game_object = new Game_Object(-10, -1, -8);
+  game_object = new Game_Object(0, 0, 0);
   handler_graphics = new Handler_Graphics_3dbox(0, 0
     , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
   game_object.addHandler(handler_graphics);
@@ -36,11 +36,11 @@ function Scene_Jolene3(width, height) {
   game_object.addHandler(handler_logic);
   game_objects.push(game_object);
 
-  game_object = new Game_Object(-10, -1, 0);
+  game_object = new Game_Object(0, 0, 0);
   handler_graphics = new Handler_Graphics_3dbox(0, 0
     , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
   game_object.addHandler(handler_graphics);
-  handler_logic = new Handler_Logic_Basic_Movement(0, 0, 0.25, 0, 0, 10);
+  handler_logic = new Handler_Logic_Basic_Movement(0, 0, -0.25, 0, 0, 100);
   game_object.addHandler(handler_logic);
   game_objects.push(game_object);
 

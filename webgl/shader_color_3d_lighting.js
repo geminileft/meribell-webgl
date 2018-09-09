@@ -37,7 +37,9 @@ varying vec4 vColor;
 // The entry point for our fragment shader.
 void main()
 {
-  vec4 lightDirection = normalize(uLightPosition - vPosition);
+  vec4 directionVector = uLightPosition - vPosition;
+  float distanceToLight = length(directionVector);
+  vec4 lightDirection = normalize(directionVector);
   float directional = clamp(dot(vTransformedNormal, lightDirection), 0.0, 1.0);
 
   vec3 reflectedVector = reflect(lightDirection.xyz, vTransformedNormal.xyz);
@@ -49,8 +51,9 @@ void main()
 
   vec3 lc = uLightColor;
   //vec3 lighting = uAmbientLightColor + specLight;
-  //vec3 lighting = uAmbientLightColor + (uLightColor * directional);
-  vec3 lighting = uAmbientLightColor + (uLightColor * directional) + specLight;
+  float attenuation = 1.0 / (1.0 + 0.025 * pow(distanceToLight, 2.0));
+  vec3 lighting = uAmbientLightColor + (attenuation * (uLightColor * directional));
+  // vec3 lighting = uAmbientLightColor + (uLightColor * directional) + specLight;
   gl_FragColor = vec4(vColor.rgb * lighting, vColor.a);    // Pass the color directly through the pipeline.
 }
 `;
@@ -84,30 +87,22 @@ function shader_color_3d_lighting_draw(gl, draw_data) {
     program_obj.aVertexNormal, GL_NORMAL_SIZE, gl.FLOAT, false
     , INTERLEAVED_SIZE * GL_FLOAT_SIZE_BYTES, (GL_VERTEX_SIZE + GL_COLOR_SIZE) * GL_FLOAT_SIZE_BYTES);
 
-  var mvMatrix = mat4.create();
-  mat4.multiply(draw_data.viewMatrix, draw_data.modelMatrix, mvMatrix);
-
-  var mvpMatrix = mat4.create();
-
-  mat4.multiply(draw_data.projectionMatrix, mvMatrix, mvpMatrix);
+  const mvMatrix = mat4_multiply2(draw_data.viewMatrix, draw_data.modelMatrix);
+  const mvpMatrix = mat4_multiply2(draw_data.projectionMatrix, mvMatrix);
 
   gl.uniformMatrix4fv(program_obj.u_MVPMatrix, false, mvpMatrix);
 
-  var mvInverse = mat4.create();
-  var normalMatrix = mat4.create();
-
-  //mat4.inverse(mvMatrix, mvInverse);
-  mat4.inverse(draw_data.modelMatrix, mvInverse);
-  mat4.transpose(mvInverse, normalMatrix);
+  var mvInverse = mat4_inverse(draw_data.modelMatrix);
+  var normalMatrix = mat4_transpose(mvInverse);
 
   gl.uniformMatrix4fv(program_obj.uNMatrix, false, normalMatrix);
   gl.uniformMatrix4fv(program_obj.uMMatrix, false, draw_data.modelMatrix);
 
-  var lightPosition = [-10, 5, 5, 1];
+  var lightPosition = [0, 0, 0, 1];
   gl.uniform4fv(program_obj.uLightPosition, lightPosition);
-  gl.uniform3fv(program_obj.uLightColor, [1, 1, .878]);
-  //gl.uniform3fv(program_obj.uAmbientLightColor, [.25, .25, .25]);
-  gl.uniform3fv(program_obj.uAmbientLightColor, [.7, .7, .7]);
+  gl.uniform3fv(program_obj.uLightColor, [1, 1, 1]);
+  gl.uniform3fv(program_obj.uAmbientLightColor, [1.0, 1.0, 1.0]);
+  // gl.uniform3fv(program_obj.uAmbientLightColor, [.0, .0, .0]);
 
   const draw_ct = interleaved.length / INTERLEAVED_SIZE;
   gl.drawArrays(gl.TRIANGLES, 0, draw_ct);

@@ -1,4 +1,4 @@
-function Handler_Logic_Camera(pos_delta, rot_delta) {
+function Handler_Logic_Camera(pos_delta=0.35, rot_delta=.005) {
     this.sys = 'logic';
     this.pos_delta = pos_delta;
     this.rot_delta = rot_delta;

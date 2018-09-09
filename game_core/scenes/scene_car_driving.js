@@ -9,7 +9,7 @@ function Scene_Car_Driving(width, height) {
     var handler_input;
   
     // game_object = new Game_Object(0, 0, 0);
-    game_object = new Game_Object(3, 3, 5);
+    game_object = new Game_Object(0, 3, 15);
   
     matrix_handler = new Handler_Graphics_Matrix(width, height, 40, .1, 100);
     game_object.addHandler(matrix_handler);
@@ -19,13 +19,99 @@ function Scene_Car_Driving(width, height) {
     game_object.addHandler(handler_logic);
     game_objects.push(game_object);
   
-    game_object = new Game_Object(0, 0, 0);
-    handler_graphics = new Handler_Graphics_Thickline([[0.690, 0.878, 0.902, 1.0]], matrix_handler);
+    game_object = new Game_Object(-2, 0, 0);
+    // handler_graphics = new Handler_Graphics_Thickline([[0.690, 0.878, 0.902, 1.0]], matrix_handler);
+    handler_graphics = new Handler_Graphics_Thickline([[1.0, 1.0, 1.0, 1.0]], matrix_handler);
     game_object.addHandler(handler_graphics);
     game_objects.push(game_object);
   
-    game_object = new Game_Object(0, 0, -8);
-    handler_graphics = new Handler_Graphics_Thickline([[0.933, 0.510, 0.933, 1.0]], matrix_handler);
+    game_object = new Game_Object(2, 0, 0);
+    // handler_graphics = new Handler_Graphics_Thickline([[0.933, 0.510, 0.933, 1.0]], matrix_handler);
+    handler_graphics = new Handler_Graphics_Thickline([[1.0, 1.0, 1.0, 1.0]], matrix_handler);
+    game_object.addHandler(handler_graphics);
+    game_objects.push(game_object);
+  
+    game_object = new Game_Object(-2, 0, -12);
+    // handler_graphics = new Handler_Graphics_Thickline([[0.690, 0.878, 0.902, 1.0]], matrix_handler);
+    handler_graphics = new Handler_Graphics_Thickline([[1.0, 1.0, 1.0, 1.0]], matrix_handler);
+    game_object.addHandler(handler_graphics);
+    game_objects.push(game_object);
+  
+    game_object = new Game_Object(2, 0, -12);
+    // handler_graphics = new Handler_Graphics_Thickline([[0.933, 0.510, 0.933, 1.0]], matrix_handler);
+    handler_graphics = new Handler_Graphics_Thickline([[1.0, 1.0, 1.0, 1.0]], matrix_handler);
+    game_object.addHandler(handler_graphics);
+    game_objects.push(game_object);
+  
+    game_object = new Game_Object(-2, 0, -24);
+    // handler_graphics = new Handler_Graphics_Thickline([[0.690, 0.878, 0.902, 1.0]], matrix_handler);
+    handler_graphics = new Handler_Graphics_Thickline([[1.0, 1.0, 1.0, 1.0]], matrix_handler);
+    game_object.addHandler(handler_graphics);
+    game_objects.push(game_object);
+  
+    game_object = new Game_Object(2, 0, -24);
+    // handler_graphics = new Handler_Graphics_Thickline([[0.933, 0.510, 0.933, 1.0]], matrix_handler);
+    handler_graphics = new Handler_Graphics_Thickline([[1.0, 1.0, 1.0, 1.0]], matrix_handler);
+    game_object.addHandler(handler_graphics);
+    game_objects.push(game_object);
+  
+    game_object = new Game_Object(-2, 0, -36);
+    // handler_graphics = new Handler_Graphics_Thickline([[0.690, 0.878, 0.902, 1.0]], matrix_handler);
+    handler_graphics = new Handler_Graphics_Thickline([[1.0, 1.0, 1.0, 1.0]], matrix_handler);
+    game_object.addHandler(handler_graphics);
+    game_objects.push(game_object);
+  
+    game_object = new Game_Object(2, 0, -36);
+    // handler_graphics = new Handler_Graphics_Thickline([[0.933, 0.510, 0.933, 1.0]], matrix_handler);
+    handler_graphics = new Handler_Graphics_Thickline([[1.0, 1.0, 1.0, 1.0]], matrix_handler);
+    game_object.addHandler(handler_graphics);
+    game_objects.push(game_object);
+  
+    game_object = new Game_Object(-2, 0, -48);
+    // handler_graphics = new Handler_Graphics_Thickline([[0.690, 0.878, 0.902, 1.0]], matrix_handler);
+    handler_graphics = new Handler_Graphics_Thickline([[1.0, 1.0, 1.0, 1.0]], matrix_handler);
+    game_object.addHandler(handler_graphics);
+    game_objects.push(game_object);
+  
+    game_object = new Game_Object(2, 0, -48);
+    // handler_graphics = new Handler_Graphics_Thickline([[0.933, 0.510, 0.933, 1.0]], matrix_handler);
+    handler_graphics = new Handler_Graphics_Thickline([[1.0, 1.0, 1.0, 1.0]], matrix_handler);
+    game_object.addHandler(handler_graphics);
+    game_objects.push(game_object);
+  
+    game_object = new Game_Object(-2, 0, -60);
+    // handler_graphics = new Handler_Graphics_Thickline([[0.690, 0.878, 0.902, 1.0]], matrix_handler);
+    handler_graphics = new Handler_Graphics_Thickline([[1.0, 1.0, 1.0, 1.0]], matrix_handler);
+    game_object.addHandler(handler_graphics);
+    game_objects.push(game_object);
+  
+    game_object = new Game_Object(2, 0, -60);
+    // handler_graphics = new Handler_Graphics_Thickline([[0.933, 0.510, 0.933, 1.0]], matrix_handler);
+    handler_graphics = new Handler_Graphics_Thickline([[1.0, 1.0, 1.0, 1.0]], matrix_handler);
+    game_object.addHandler(handler_graphics);
+    game_objects.push(game_object);
+  
+    game_object = new Game_Object(-2, 0, -72);
+    // handler_graphics = new Handler_Graphics_Thickline([[0.690, 0.878, 0.902, 1.0]], matrix_handler);
+    handler_graphics = new Handler_Graphics_Thickline([[1.0, 1.0, 1.0, 1.0]], matrix_handler);
+    game_object.addHandler(handler_graphics);
+    game_objects.push(game_object);
+  
+    game_object = new Game_Object(2, 0, -72);
+    // handler_graphics = new Handler_Graphics_Thickline([[0.933, 0.510, 0.933, 1.0]], matrix_handler);
+    handler_graphics = new Handler_Graphics_Thickline([[1.0, 1.0, 1.0, 1.0]], matrix_handler);
+    game_object.addHandler(handler_graphics);
+    game_objects.push(game_object);
+  
+    game_object = new Game_Object(-2, 0, -84);
+    // handler_graphics = new Handler_Graphics_Thickline([[0.690, 0.878, 0.902, 1.0]], matrix_handler);
+    handler_graphics = new Handler_Graphics_Thickline([[1.0, 1.0, 1.0, 1.0]], matrix_handler);
+    game_object.addHandler(handler_graphics);
+    game_objects.push(game_object);
+  
+    game_object = new Game_Object(2, 0, -84);
+    // handler_graphics = new Handler_Graphics_Thickline([[0.933, 0.510, 0.933, 1.0]], matrix_handler);
+    handler_graphics = new Handler_Graphics_Thickline([[1.0, 1.0, 1.0, 1.0]], matrix_handler);
     game_object.addHandler(handler_graphics);
     game_objects.push(game_object);
 
