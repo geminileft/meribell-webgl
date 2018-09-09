@@ -6,7 +6,7 @@ function Handler_Graphics_Singlestreet(color_range, matrixHandler, width, height
 	this.height = height;
 
 	const vdata = this.getData();
-    const colors = array_duplicate(color_range, 6, vdata.count);
+    const colors = array_duplicate(color_range, 12, vdata.count);
 
     const interleaved = create_interleaved3(
         vdata.vertices, GL_VERTEX_SIZE
@@ -37,19 +37,32 @@ Handler_Graphics_Singlestreet.prototype.update = function(gfx) {
 }
 
 Handler_Graphics_Singlestreet.prototype.getData = function() {
+	const spacing = 4.0;
+	const half_spacing = spacing / 2.0;
+
 	const width = this.width;
 	const half_width = width / 2.0;
 	const height = this.height;
 	const half_height = height / 2.0;
 
+	const SINGLE_VERTEX_COUNT = 6;
+
 	return {
 vertices : [
-	half_width, 0.0, -half_height
-	, half_width, 0.0, half_height
-	, -half_width, 0.0, half_height
-	, half_width, 0.0, -half_height
-	, -half_width, 0.0, half_height
-	, -half_width, 0.0, -half_height
+	-half_spacing + half_width, 0.0, -half_height
+	, -half_spacing + half_width, 0.0, half_height
+	, -half_spacing -half_width, 0.0, half_height
+	, -half_spacing + half_width, 0.0, -half_height
+	, -half_spacing -half_width, 0.0, half_height
+	, -half_spacing -half_width, 0.0, -half_height
+
+	, half_spacing + half_width, 0.0, -half_height
+	, half_spacing + half_width, 0.0, half_height
+	, half_spacing -half_width, 0.0, half_height
+	, half_spacing + half_width, 0.0, -half_height
+	, half_spacing -half_width, 0.0, half_height
+	, half_spacing -half_width, 0.0, -half_height
+
 ]
 
 , normals : [
@@ -59,7 +72,15 @@ vertices : [
 	, 0.0000, -1.0000, 0.0000
 	, 0.0000, -1.0000, 0.0000
 	, 0.0000, -1.0000, 0.0000
+
+	, 0.0000, -1.0000, 0.0000
+	, 0.0000, -1.0000, 0.0000
+	, 0.0000, -1.0000, 0.0000
+	, 0.0000, -1.0000, 0.0000
+	, 0.0000, -1.0000, 0.0000
+	, 0.0000, -1.0000, 0.0000
+
 ]
-, count : 6
+, count : 2 * SINGLE_VERTEX_COUNT
 };
 }
