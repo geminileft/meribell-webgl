@@ -37,7 +37,7 @@ Handler_Graphics_Singlestreet.prototype.update = function(gfx) {
 }
 
 Handler_Graphics_Singlestreet.prototype.getData = function() {
-	const lanes = 1;
+	const lanes = 3;
 
 	const spacing = 4.0;
 	//TODO: REMOVE BELOW AFTER REPLACING WITH STARTING RIGHT POSITION
