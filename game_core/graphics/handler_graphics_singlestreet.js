@@ -1,5 +1,5 @@
 function Handler_Graphics_Singlestreet(color_range, matrixHandler, width, height
-	, lanes, rows, spacing, top_spacing
+	, lanes, rows, spacing, top_spacing, camera_obj
 ) {
 	this.projectionMatrix = matrixHandler.getProjectionMatrix();
 	this.matrixHandler = matrixHandler;
@@ -11,20 +11,25 @@ function Handler_Graphics_Singlestreet(color_range, matrixHandler, width, height
 	this.rows = rows;
 	this.spacing = spacing;
 	this.top_spacing = top_spacing;
+	this.camera_obj = camera_obj;
 }
 
 Handler_Graphics_Singlestreet.prototype.update = function(gfx) {
 	const game_object = this.game_object;
 
-    const x = game_object.x;
-    const y = game_object.y;
-    const z = game_object.z;
+    // const x = game_object.x;
+    // const y = game_object.y;
+    const z = this.camera_obj.z;
+
+	const size_interval = (this.top_spacing * this.height);
+	const start_z = Math.floor(z / size_interval) * size_interval;
 
 	const vdata = this.getData(this.color_range
 		, this.lanes
 		, this.rows
 		, this.spacing
 		, this.top_spacing
+		, start_z
 	);
 
     const interleaved = create_interleaved3(
@@ -51,6 +56,7 @@ Handler_Graphics_Singlestreet.prototype.getData = function(
 	, rows
 	, spacing
 	, top_spacing
+	, start_z
 ) {
 	const SINGLE_VERTEX_COUNT = 6;
 
@@ -75,12 +81,12 @@ Handler_Graphics_Singlestreet.prototype.getData = function(
 		right_position = (lanes * spacing) / 2.0;
 		for(var i = 0;i < lanes + 1;++i) {
 			const STANDARD_VERTEX = [
-				-right_position + half_width, 0.0, -top_position -half_height
-				, -right_position + half_width, 0.0, -top_position + half_height
-				, -right_position -half_width, 0.0, -top_position + half_height
-				, -right_position + half_width, 0.0, -top_position - half_height
-				, -right_position -half_width, 0.0, -top_position + half_height
-				, -right_position -half_width, 0.0, -top_position - half_height		
+				-right_position + half_width, 0.0, -top_position -half_height + start_z
+				, -right_position + half_width, 0.0, -top_position + half_height + start_z
+				, -right_position -half_width, 0.0, -top_position + half_height + start_z
+				, -right_position + half_width, 0.0, -top_position - half_height + start_z
+				, -right_position -half_width, 0.0, -top_position + half_height + start_z
+				, -right_position -half_width, 0.0, -top_position - half_height + start_z	
 			];
 			my_vertices.push.apply(my_vertices, STANDARD_VERTEX);
 			right_position -= spacing;
