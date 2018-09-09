@@ -22,14 +22,22 @@ function Scene_Car_Driving(width, height) {
     const line_length = 12.0;
     const line_length_multi = 1.85;
 
+    game_object = new Game_Object(-6, 0, 0);
+    handler_graphics = new Handler_Graphics_Thickline([[0.690, 0.878, 0.902, 1.0]], matrix_handler);
+    game_object.addHandler(handler_graphics);
+    game_objects.push(game_object);
+
+    game_object = new Game_Object(6, 0, 0);
+    handler_graphics = new Handler_Graphics_Thickline([[0.933, 0.510, 0.933, 1.0]], matrix_handler);
+    game_object.addHandler(handler_graphics);
+    game_objects.push(game_object);
+
     game_object = new Game_Object(-2, 0, 0);
-    // handler_graphics = new Handler_Graphics_Thickline([[0.690, 0.878, 0.902, 1.0]], matrix_handler);
     handler_graphics = new Handler_Graphics_Thickline([[1.0, 1.0, 1.0, 1.0]], matrix_handler);
     game_object.addHandler(handler_graphics);
     game_objects.push(game_object);
   
     game_object = new Game_Object(2, 0, 0);
-    // handler_graphics = new Handler_Graphics_Thickline([[0.933, 0.510, 0.933, 1.0]], matrix_handler);
     handler_graphics = new Handler_Graphics_Thickline([[1.0, 1.0, 1.0, 1.0]], matrix_handler);
     game_object.addHandler(handler_graphics);
     game_objects.push(game_object);
