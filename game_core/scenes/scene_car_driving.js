@@ -8,9 +8,8 @@ function Scene_Car_Driving(width, height) {
     var handler_logic;
     var handler_input;
   
-    // game_object = new Game_Object(0, 0, 0);
+    // Setting Up Camera
     game_object = new Game_Object(0, 5, 26);
-  
     matrix_handler = new Handler_Graphics_Matrix(width, height, 40, .1, 1000);
     game_object.addHandler(matrix_handler);
     handler_input = new Handler_Input_Camera();
@@ -71,7 +70,7 @@ function Scene_Car_Driving(width, height) {
       draw_line_row(i, line_width, line_height);
     }
 
-
+    // Setting up box
     game_object = new Game_Object(0, 0, 0);
     handler_graphics = new Handler_Graphics_3dbox(0, 0
       , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
