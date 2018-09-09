@@ -5,12 +5,11 @@ function Handler_Graphics_Singlestreet(color_range, matrixHandler, width, height
 	this.width = width;
 	this.height = height;
 
-	const vdata = this.getData();
-    const colors = array_duplicate(color_range, 6, vdata.count);
+	const vdata = this.getData(color_range);
 
     const interleaved = create_interleaved3(
         vdata.vertices, GL_VERTEX_SIZE
-        , colors , GL_COLOR_SIZE
+        , vdata.colors , GL_COLOR_SIZE
         , vdata.normals, GL_NORMAL_SIZE
         , vdata.count);
 
@@ -36,7 +35,7 @@ Handler_Graphics_Singlestreet.prototype.update = function(gfx) {
 	gfx.add_data(data);
 }
 
-Handler_Graphics_Singlestreet.prototype.getData = function() {
+Handler_Graphics_Singlestreet.prototype.getData = function(color_range) {
 	const SINGLE_VERTEX_COUNT = 6;
 
 	const STANDARD_NORMAL = [
@@ -62,13 +61,6 @@ Handler_Graphics_Singlestreet.prototype.getData = function() {
 	const height = this.height;
 	const half_height = height / 2.0;
 
-	var my_normals = [];
-	for(var i = 0;i < lanes + 1;++i) {
-		for (var j = 0;j < rows;++j) {
-			my_normals.push.apply(my_normals, STANDARD_NORMAL);
-		}
-	}
-
 	var my_vertices = [];
 	for (var j = 0;j < rows;++j) {
 		right_position = (lanes * spacing) / 2.0;
@@ -87,10 +79,61 @@ Handler_Graphics_Singlestreet.prototype.getData = function() {
 		top_position += (height * top_spacing);
 	}
 
-	return {
-vertices : my_vertices
+	const ct = (lanes + 1) * SINGLE_VERTEX_COUNT * rows;
 
-, normals : my_normals
-, count : (lanes + 1) * SINGLE_VERTEX_COUNT * rows
-};
+	const left_divider_color = color_range[0];
+	var ld_colors = [];
+	ld_colors = ld_colors.concat(
+		left_divider_color
+		,left_divider_color
+		,left_divider_color
+		,left_divider_color
+		,left_divider_color
+		,left_divider_color
+	);
+	const right_divider_color = color_range[1];
+	var rd_colors = [];
+	rd_colors = rd_colors.concat(
+		right_divider_color
+		,right_divider_color
+		,right_divider_color
+		,right_divider_color
+		,right_divider_color
+		,right_divider_color
+	);
+	const lane_color = color_range[2];
+	var l_colors = [];
+	l_colors = l_colors.concat(
+		lane_color
+		,lane_color
+		,lane_color
+		,lane_color
+		,lane_color
+		,lane_color
+	);
+
+	var full_colors = [];
+	for (i = 1;i < lanes;++i) {
+		full_colors.push.apply(full_colors, l_colors);
+	}
+
+	var my_normals = [];
+	var my_colors = [];
+	const blank = [];
+	for(var i = 0;i < lanes + 1;++i) {
+		for (var j = 0;j < rows;++j) {
+			my_normals.push.apply(my_normals, STANDARD_NORMAL);
+			my_colors.push.apply(my_colors
+				, blank.concat(ld_colors, full_colors, rd_colors)
+			)
+		}
+	}
+
+	const my_colors2 = array_duplicate(color_range, SINGLE_VERTEX_COUNT, ct);
+	return {
+		vertices : my_vertices
+		, normals : my_normals
+		, colors : my_colors
+		, count : ct
+	};
 }
