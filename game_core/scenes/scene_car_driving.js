@@ -27,8 +27,8 @@ function Scene_Car_Driving(width, height) {
       , matrix_handler
       , line_width
       , line_height
-      , 5
-      , 50
+      , 3
+      , 7
       , 4.0
       , 1.85
     );
@@ -41,7 +41,7 @@ function Scene_Car_Driving(width, height) {
     handler_graphics = new Handler_Graphics_3dbox(0, 0
       , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
     game_object.addHandler(handler_graphics);
-    handler_logic = new Handler_Logic_Basic_Movement(0, 0, -0.25, 0, 0, 100);
+    handler_logic = new Handler_Logic_Basic_Movement(0, 0, -0.25, 0, 0, 100, false);
     game_object.addHandler(handler_logic);
     game_objects.push(game_object);
       

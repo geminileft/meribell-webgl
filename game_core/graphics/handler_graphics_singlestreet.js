@@ -6,21 +6,11 @@ function Handler_Graphics_Singlestreet(color_range, matrixHandler, width, height
 	this.sys = 'graphics';
 	this.width = width;
 	this.height = height;
-
-	const vdata = this.getData(color_range
-		, lanes
-		, rows
-		, spacing
-		, top_spacing
-	);
-
-    const interleaved = create_interleaved3(
-        vdata.vertices, GL_VERTEX_SIZE
-        , vdata.colors , GL_COLOR_SIZE
-        , vdata.normals, GL_NORMAL_SIZE
-        , vdata.count);
-
-	this.interleaved = interleaved;
+	this.color_range = color_range;
+	this.lanes = lanes;
+	this.rows = rows;
+	this.spacing = spacing;
+	this.top_spacing = top_spacing;
 }
 
 Handler_Graphics_Singlestreet.prototype.update = function(gfx) {
@@ -30,10 +20,23 @@ Handler_Graphics_Singlestreet.prototype.update = function(gfx) {
     const y = game_object.y;
     const z = game_object.z;
 
+	const vdata = this.getData(this.color_range
+		, this.lanes
+		, this.rows
+		, this.spacing
+		, this.top_spacing
+	);
+
+    const interleaved = create_interleaved3(
+        vdata.vertices, GL_VERTEX_SIZE
+        , vdata.colors , GL_COLOR_SIZE
+        , vdata.normals, GL_NORMAL_SIZE
+        , vdata.count);
+
 	var identity = mat4_identity();
 
     const data = {
-        interleaved:this.interleaved
+        interleaved:interleaved
 		, modelMatrix: identity
 		, projectionMatrix: this.projectionMatrix
 		, viewMatrix: this.matrixHandler.getViewMatrix()
