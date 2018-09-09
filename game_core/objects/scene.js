@@ -20,7 +20,6 @@ Scene.prototype.start = function(system_map) {
         for(var i = 0;i < object.handlers.length;++i) {
             const handler = object.handlers[i];
             const sys = system_map[handler.sys];
-            //TODO: TEST FOR INVALID SYS
             sys.addHandler(handler);
         }
     }

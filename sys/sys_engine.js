@@ -14,7 +14,6 @@ Sys_Engine.prototype.add_scene = function(name, scene) {
   
 Sys_Engine.prototype.start = function(name) {
 
-  //TODO: TEST BAD NAME!!
   const scene = this._scenes[name];
 
   this._scene = scene;
@@ -45,9 +44,6 @@ function run_impl() {
   gfx.drawScene();
 
   this._scene.reset_objects();
-
-  //TODO:THIS IS WHERE WE TRANSITION?
-
 
   window.setTimeout(this._run, 1000 / 60);
 }

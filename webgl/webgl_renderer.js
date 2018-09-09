@@ -65,11 +65,7 @@ WebGl_Renderer.prototype.drawScene = function(data) {
   for (var i = 0;i < data.length;++i) {
     const draw_data = data[i];
     var program_obj;
-    if (draw_data.shader != null) {
-      program_obj = this.shaders[draw_data.shader];      
-    } else {
-      //TODO: THIS SHOULD NEVER HAPPEN!!
-    }
+    program_obj = this.shaders[draw_data.shader];      
     /*
     else if (draw_data.texture != null) {
       program_obj = this.shaders.texture;
