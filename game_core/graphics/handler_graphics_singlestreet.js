@@ -1,11 +1,18 @@
-function Handler_Graphics_Singlestreet(color_range, matrixHandler, width, height) {
+function Handler_Graphics_Singlestreet(color_range, matrixHandler, width, height
+	, lanes, rows, spacing, top_spacing
+) {
 	this.projectionMatrix = matrixHandler.getProjectionMatrix();
 	this.matrixHandler = matrixHandler;
 	this.sys = 'graphics';
 	this.width = width;
 	this.height = height;
 
-	const vdata = this.getData(color_range);
+	const vdata = this.getData(color_range
+		, lanes
+		, rows
+		, spacing
+		, top_spacing
+	);
 
     const interleaved = create_interleaved3(
         vdata.vertices, GL_VERTEX_SIZE
@@ -35,7 +42,13 @@ Handler_Graphics_Singlestreet.prototype.update = function(gfx) {
 	gfx.add_data(data);
 }
 
-Handler_Graphics_Singlestreet.prototype.getData = function(color_range) {
+Handler_Graphics_Singlestreet.prototype.getData = function(
+	color_range
+	, lanes
+	, rows
+	, spacing
+	, top_spacing
+) {
 	const SINGLE_VERTEX_COUNT = 6;
 
 	const STANDARD_NORMAL = [
@@ -46,13 +59,6 @@ Handler_Graphics_Singlestreet.prototype.getData = function(color_range) {
 		, 0.0000, -1.0000, 0.0000
 		, 0.0000, -1.0000, 0.0000
 	];
-
-	// TODO: REFACTOR TO BE PARAMETERS
-	const lanes = 3;
-	const rows = 20;
-	const spacing = 4.0;
-	const top_spacing = 1.85;
-
 
 	var right_position = (lanes * spacing) / 2.0;
 	var top_position = 0;
@@ -129,7 +135,6 @@ Handler_Graphics_Singlestreet.prototype.getData = function(color_range) {
 		}
 	}
 
-	const my_colors2 = array_duplicate(color_range, SINGLE_VERTEX_COUNT, ct);
 	return {
 		vertices : my_vertices
 		, normals : my_normals

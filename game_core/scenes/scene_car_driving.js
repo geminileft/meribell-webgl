@@ -20,8 +20,6 @@ function Scene_Car_Driving(width, height) {
   
     const line_width = 0.25;
     const line_height = 12.0;
-    const line_length = 12.0;
-    const line_length_multi = 1.85;
 
     game_object = new Game_Object(0, 0, 0);
     handler_graphics = new Handler_Graphics_Singlestreet(
@@ -29,6 +27,10 @@ function Scene_Car_Driving(width, height) {
       , matrix_handler
       , line_width
       , line_height
+      , 5
+      , 50
+      , 4.0
+      , 1.85
     );
     game_object.addHandler(handler_graphics);
     game_objects.push(game_object);
