@@ -49,6 +49,21 @@ Handler_Graphics_Singlestreet.prototype.getData = function() {
 
 	const SINGLE_VERTEX_COUNT = 6;
 
+	const STANDARD_NORMAL = [
+		0.0000, -1.0000, 0.0000
+		, 0.0000, -1.0000, 0.0000
+		, 0.0000, -1.0000, 0.0000
+		, 0.0000, -1.0000, 0.0000
+		, 0.0000, -1.0000, 0.0000
+		, 0.0000, -1.0000, 0.0000
+	];
+
+	var my_normals = STANDARD_NORMAL;
+
+	for(var i = 0;i < lanes;++i) {
+		my_normals.push.apply(my_normals, STANDARD_NORMAL);
+	}
+
 	return {
 vertices : [
 	-half_spacing + half_width, 0.0, -half_height
@@ -67,22 +82,7 @@ vertices : [
 
 ]
 
-, normals : [
-	0.0000, -1.0000, 0.0000
-	, 0.0000, -1.0000, 0.0000
-	, 0.0000, -1.0000, 0.0000
-	, 0.0000, -1.0000, 0.0000
-	, 0.0000, -1.0000, 0.0000
-	, 0.0000, -1.0000, 0.0000
-
-	, 0.0000, -1.0000, 0.0000
-	, 0.0000, -1.0000, 0.0000
-	, 0.0000, -1.0000, 0.0000
-	, 0.0000, -1.0000, 0.0000
-	, 0.0000, -1.0000, 0.0000
-	, 0.0000, -1.0000, 0.0000
-
-]
+, normals : my_normals
 , count : 2 * SINGLE_VERTEX_COUNT
 };
 }

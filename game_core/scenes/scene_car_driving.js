@@ -25,7 +25,7 @@ function Scene_Car_Driving(width, height) {
 
     game_object = new Game_Object(0, 0, 0);
     handler_graphics = new Handler_Graphics_Singlestreet(
-      [[0.690, 0.878, 0.902, 1.0]]
+      [[0.690, 0.878, 0.902, 1.0], [0.933, 0.510, 0.933, 1.0]]
       , matrix_handler
       , line_width
       , line_height
