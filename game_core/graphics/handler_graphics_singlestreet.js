@@ -6,7 +6,7 @@ function Handler_Graphics_Singlestreet(color_range, matrixHandler, width, height
 	this.height = height;
 
 	const vdata = this.getData();
-    const colors = array_duplicate(color_range, 12, vdata.count);
+    const colors = array_duplicate(color_range, 6, vdata.count);
 
     const interleaved = create_interleaved3(
         vdata.vertices, GL_VERTEX_SIZE
@@ -37,8 +37,10 @@ Handler_Graphics_Singlestreet.prototype.update = function(gfx) {
 }
 
 Handler_Graphics_Singlestreet.prototype.getData = function() {
+	const lanes = 1;
+
 	const spacing = 4.0;
-	const half_spacing = spacing / 2.0;
+	const half_spacing = (lanes * spacing) / 2.0;
 
 	const width = this.width;
 	const half_width = width / 2.0;
