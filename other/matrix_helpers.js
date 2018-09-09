@@ -110,3 +110,9 @@ function mat4_transpose(m) {
     mat4.transpose(m, newMatrix);
     return newMatrix;
 }
+
+function mat4_identity() {
+    var identity = mat4.create();
+	mat4.identity(identity);
+    return identity;
+}

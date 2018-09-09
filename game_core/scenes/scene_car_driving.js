@@ -23,7 +23,7 @@ function Scene_Car_Driving(width, height) {
     const line_length = 12.0;
     const line_length_multi = 1.85;
 
-    game_object = new Game_Object(-6, 0, -line_length * line_length_multi * 0);
+    game_object = new Game_Object(0, 0, 0);
     handler_graphics = new Handler_Graphics_Singlestreet(
       [[0.690, 0.878, 0.902, 1.0]]
       , matrix_handler

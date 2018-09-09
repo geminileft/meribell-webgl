@@ -24,21 +24,11 @@ Handler_Graphics_Singlestreet.prototype.update = function(gfx) {
     const y = game_object.y;
     const z = game_object.z;
 
-	var identity = mat4.create();
-
-	mat4.identity(identity);
-
-
-	var working = mat4.create();
-	var modelMatrix = mat4.create();
-
-	var modelTranslateMatrix = mat4.create();
-	mat4.identity(modelTranslateMatrix);
-	mat4.translate(modelTranslateMatrix, [x, y, z]);
+	var identity = mat4_identity();
 
     const data = {
         interleaved:this.interleaved
-		, modelMatrix: modelTranslateMatrix
+		, modelMatrix: identity
 		, projectionMatrix: this.projectionMatrix
 		, viewMatrix: this.matrixHandler.getViewMatrix()
         , shader: 'shader_color_3d_lighting'
