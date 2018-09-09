@@ -54,12 +54,12 @@ Handler_Graphics_Streetline.prototype.getData = function() {
 
 	return {
 vertices : [
-	half_width, -1.000000, -half_height
-	, half_width, -1.000000, half_height
-	, -half_width, -1.000000, half_height
-	, half_width, -1.000000, -half_height
-	, -half_width, -1.000000, half_height
-	, -half_width, -1.000000, -half_height
+	half_width, 0.0, -half_height
+	, half_width, 0.0, half_height
+	, -half_width, 0.0, half_height
+	, half_width, 0.0, -half_height
+	, -half_width, 0.0, half_height
+	, -half_width, 0.0, -half_height
 ]
 
 , normals : [
