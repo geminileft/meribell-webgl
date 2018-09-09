@@ -53,9 +53,9 @@ Handler_Graphics_Thickline.prototype.update = function(gfx) {
 }
 
 Handler_Graphics_Thickline.prototype.getData = function() {
-	const width = .2;
+	const width = .25;
 	const half_width = width / 2.0;
-	const height = 4.0;
+	const height = 12.0;
 	const half_height = height / 2.0;
 
 	return {
