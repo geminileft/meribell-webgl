@@ -10,7 +10,8 @@ function Scene_Car_Driving(width, height) {
   
     // Setting Up Camera
     const camera_object = new Game_Object(0, 5, 26);
-    matrix_handler = new Handler_Graphics_Matrix(width, height, 40, .1, 1000);
+    matrix_handler = new Handler_Graphics_Matrix(width, height
+      , 40, .1, 1000, 20);
     camera_object.addHandler(matrix_handler);
     handler_input = new Handler_Input_Camera();
     camera_object.addHandler(handler_input);
