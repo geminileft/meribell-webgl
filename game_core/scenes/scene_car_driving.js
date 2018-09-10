@@ -39,7 +39,7 @@ function Scene_Car_Driving(width, height) {
 
 
     // Setting up box
-    game_object = new Game_Object(0, 0, 0);
+    game_object = new Game_Object(0, 1, 0);
     handler_graphics = new Handler_Graphics_3dbox(0, 0
       , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
     game_object.addHandler(handler_graphics);
