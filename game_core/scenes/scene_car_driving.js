@@ -9,7 +9,7 @@ function Scene_Car_Driving(width, height) {
     var handler_input;
   
     // Setting Up Camera
-    const camera_object = new Game_Object(0, 5, 26);
+    const camera_object = new Game_Object(0, 5, 20);
     matrix_handler = new Handler_Graphics_Matrix(width, height
       , 40, .1, 1000, 20);
     camera_object.addHandler(matrix_handler);
@@ -28,7 +28,7 @@ function Scene_Car_Driving(width, height) {
       , matrix_handler
       , line_width
       , line_height
-      , 2
+      , 3 // lanes
       , 7
       , 4.0
       , 1.85
@@ -44,7 +44,7 @@ function Scene_Car_Driving(width, height) {
       , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
     game_object.addHandler(handler_graphics);
     handler_logic = new Handler_Logic_Basic_Movement(0, 0, -1.0, 0, 0, 100, false);
-    game_object.addHandler(handler_logic);
+    // game_object.addHandler(handler_logic);
     game_objects.push(game_object);
       
     const scene = new Scene(game_objects);
