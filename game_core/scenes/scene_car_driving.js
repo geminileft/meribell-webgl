@@ -20,7 +20,7 @@ function Scene_Car_Driving(width, height) {
     game_objects.push(camera_object);
   
     const line_width = 0.25;
-    const line_height = 50.0;
+    const line_height = 30.0;
 
     game_object = new Game_Object(0, 0, 0);
     handler_graphics = new Handler_Graphics_Singlestreet(
@@ -42,8 +42,8 @@ function Scene_Car_Driving(width, height) {
     game_object = new Game_Object(0, 1, 0);
     handler_graphics = new Handler_Graphics_3dbox(0, 0
       , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
-    //game_object.addHandler(handler_graphics);
-    handler_logic = new Handler_Logic_Basic_Movement(0, 0, -1, 0, 0, 100, false);
+    game_object.addHandler(handler_graphics);
+    handler_logic = new Handler_Logic_Basic_Movement(0, 0, -3, 0, 0, 100, false);
     game_object.addHandler(handler_logic);
     game_objects.push(game_object);
     
