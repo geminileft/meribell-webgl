@@ -19,8 +19,8 @@ function Scene_Car_Driving(width, height) {
     camera_object.addHandler(handler_logic);
     game_objects.push(camera_object);
   
-    const line_width = 0.25;
-    const line_height = 12.0;
+    const line_width = 0.3;
+    const line_height = 24.0;
 
     game_object = new Game_Object(0, 0, 0);
     handler_graphics = new Handler_Graphics_Singlestreet(
