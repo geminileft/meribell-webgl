@@ -22,7 +22,7 @@ Handler_Graphics_Singlestreet.prototype.update = function(gfx) {
     const z = this.camera_obj.z;
 
 	const size_interval = (this.top_spacing * this.height);
-	const start_z = Math.floor(z / size_interval) * size_interval;
+	const start_z = Math.ceil(z / size_interval) * size_interval;
 
 	const vdata = this.getData(this.color_range
 		, this.lanes
