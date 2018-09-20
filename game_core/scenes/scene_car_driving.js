@@ -28,7 +28,7 @@ function Scene_Car_Driving(width, height) {
       , matrix_handler
       , line_width
       , line_height
-      , 2 // lanes
+      , 5 // lanes
       , 7
       , 4.0
       , 1.85
