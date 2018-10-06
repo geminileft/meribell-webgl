@@ -23,12 +23,12 @@ function Scene_Car_Driving(width, height) {
     const line_height = 30.0;
 
     game_object = new Game_Object(0, 0, 0);
-    handler_graphics = new Handler_Graphics_Singlestreet(
+    handler_graphics = new Handler_Graphics_Curvedstreet(
       [[0.690, 0.878, 0.902, 1.0], [0.933, 0.510, 0.933, 1.0], [1.0, 1.0, 1.0, 1.0]]
       , matrix_handler
       , line_width
       , line_height
-      , 5 // lanes
+      , 3 // lanes
       , 7
       , 4.0
       , 1.85
