@@ -1,4 +1,8 @@
-//SHADER HAS HARD CODING
+/*
+global
+shader_programs
+mat4
+*/
 
 const SINGLE_COLOR_VERTEX_SHADER = `
 uniform mat4 uProjectionMatrix;
@@ -144,8 +148,5 @@ const single_color_shader = {
   , draw: single_color_draw
 };
 
-var shader_programs = [
-  texture_shader
-  , single_color_shader
-];
-
+shader_programs.push(texture_shader);
+shader_programs.push(single_color_shader);

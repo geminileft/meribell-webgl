@@ -16,7 +16,7 @@ Sys_Graphics.prototype.update = function() {
 }
 
 Sys_Graphics.prototype.drawScene = function() {
-  data = this._draw_data;
+  const data = this._draw_data;
   this._renderer.drawScene(data);
   this._draw_data = [];
 }
