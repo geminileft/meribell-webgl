@@ -1,3 +1,17 @@
+/*
+global
+create_interleaved3
+mat4_identity
+GL_VERTEX_SIZE
+GL_COLOR_SIZE
+GL_NORMAL_SIZE
+vec3
+bez2_point_at
+bez3_point_at
+bez4_point_at
+*/
+
+
 function Handler_Graphics_Curvedstreet(color_range, matrixHandler, width, height
 	, lanes, rows, spacing, top_spacing, camera_obj
 ) {
@@ -12,6 +26,12 @@ function Handler_Graphics_Curvedstreet(color_range, matrixHandler, width, height
 	this.spacing = spacing;
 	this.top_spacing = top_spacing;
 	this.camera_obj = camera_obj;
+
+	var x2 = bez2_point_at([0,0], [2,2], 0.5);
+	var x3 = bez3_point_at([0,2], [0,0], [2,0], 0.5);
+	var x4 = bez4_point_at([0,0], [0,2], [2,2], [2,0], 0.5);
+	var y = 0;
+	var z = x3[0] * y;
 }
 
 Handler_Graphics_Curvedstreet.prototype.update = function(gfx) {
@@ -48,6 +68,60 @@ Handler_Graphics_Curvedstreet.prototype.update = function(gfx) {
         , shader: 'shader_color_3d_lighting'
     };
 	gfx.add_data(data);
+}
+
+
+function get_colors(color_range, lanes, rows) {
+	const LEFT_DIVIDER_COLOR_INDEX = 1;
+	const RIGHT_DIVIDER_COLOR_INDEX = 0;
+
+	const left_divider_color = color_range[LEFT_DIVIDER_COLOR_INDEX];
+	var ld_colors = [];
+	ld_colors = ld_colors.concat(
+		left_divider_color
+		,left_divider_color
+		,left_divider_color
+		,left_divider_color
+		,left_divider_color
+		,left_divider_color
+	);
+	const right_divider_color = color_range[RIGHT_DIVIDER_COLOR_INDEX];
+	var rd_colors = [];
+	rd_colors = rd_colors.concat(
+		right_divider_color
+		,right_divider_color
+		,right_divider_color
+		,right_divider_color
+		,right_divider_color
+		,right_divider_color
+	);
+	const lane_color = color_range[2];
+	var l_colors = [];
+	l_colors = l_colors.concat(
+		lane_color
+		,lane_color
+		,lane_color
+		,lane_color
+		,lane_color
+		,lane_color
+	);
+
+	var full_colors = [];
+	for (var i = 1;i < lanes;++i) {
+		full_colors.push.apply(full_colors, l_colors);
+	}
+
+	var my_colors = [];
+	const blank = [];
+	for(var i = 0;i < lanes + 1;++i) {
+		for (var j = 0;j < rows;++j) {
+			my_colors.push.apply(my_colors
+				, blank.concat(ld_colors, full_colors, rd_colors)
+			)
+		}
+	}
+
+	return my_colors
 }
 
 Handler_Graphics_Curvedstreet.prototype.getData = function(
@@ -129,59 +203,10 @@ Handler_Graphics_Curvedstreet.prototype.getData = function(
 
 	const ct = (lanes + 1) * SINGLE_VERTEX_COUNT * rows;
 
-	const LEFT_DIVIDER_COLOR_INDEX = 1;
-	const RIGHT_DIVIDER_COLOR_INDEX = 0;
-
-	const left_divider_color = color_range[LEFT_DIVIDER_COLOR_INDEX];
-	var ld_colors = [];
-	ld_colors = ld_colors.concat(
-		left_divider_color
-		,left_divider_color
-		,left_divider_color
-		,left_divider_color
-		,left_divider_color
-		,left_divider_color
-	);
-	const right_divider_color = color_range[RIGHT_DIVIDER_COLOR_INDEX];
-	var rd_colors = [];
-	rd_colors = rd_colors.concat(
-		right_divider_color
-		,right_divider_color
-		,right_divider_color
-		,right_divider_color
-		,right_divider_color
-		,right_divider_color
-	);
-	const lane_color = color_range[2];
-	var l_colors = [];
-	l_colors = l_colors.concat(
-		lane_color
-		,lane_color
-		,lane_color
-		,lane_color
-		,lane_color
-		,lane_color
-	);
-
-	var full_colors = [];
-	for (i = 1;i < lanes;++i) {
-		full_colors.push.apply(full_colors, l_colors);
-	}
-
-	var my_colors = [];
-	const blank = [];
-	for(var i = 0;i < lanes + 1;++i) {
-		for (var j = 0;j < rows;++j) {
-			my_colors.push.apply(my_colors
-				, blank.concat(ld_colors, full_colors, rd_colors)
-			)
-		}
-	}
-
 	return {
 		vertices : my_vertices
 		, normals : my_normals
-		, colors : my_colors
+		, colors : get_colors(color_range, lanes, rows)
 		, count : ct
 	};
 }

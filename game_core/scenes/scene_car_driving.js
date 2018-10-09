@@ -1,3 +1,19 @@
+/*
+global
+Scene
+Game_Object
+Handler_Graphics_Matrix
+Handler_Input_Camera
+Handler_Logic_Camera
+Handler_Graphics_Curvedstreet
+Handler_Graphics_3dbox
+Handler_Logic_Bez_Movement
+
+
+
+
+*/
+
 
 function Scene_Car_Driving(width, height) {
     var game_objects = [];
@@ -43,8 +59,9 @@ function Scene_Car_Driving(width, height) {
     handler_graphics = new Handler_Graphics_3dbox(0, 0
       , [[1.0, 1.0, 1.0, 1.0]], matrix_handler);
     game_object.addHandler(handler_graphics);
-    handler_logic = new Handler_Logic_Basic_Movement(0, 0, -3, 0, 0, 100, false);
-    game_object.addHandler(handler_logic);
+    handler_logic = new Handler_Logic_Bez_Movement(game_object);
+    // handler_logic = new Handler_Logic_Basic_Movement(0, 0, -3, 0, 0, 100, false);
+    // game_object.addHandler(handler_logic);
     game_objects.push(game_object);
     
     matrix_handler.setFollowObject(game_object);

@@ -1,4 +1,17 @@
-//TODO: SHADER HAS HARD CODING
+/*
+global
+create_interleaved3
+mat4_identity
+GL_FLOAT_SIZE_BYTES
+GL_VERTEX_SIZE
+GL_COLOR_SIZE
+GL_NORMAL_SIZE
+vec3
+mat4_multiply2
+mat4_inverse
+mat4_transpose
+shader_programs
+*/
 
 const SHADER_COLOR_3D_LIGHTING_VERTEX_SHADER = `
 precision mediump float;
